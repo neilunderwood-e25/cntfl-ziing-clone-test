@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# next-cms-boilerplate
 
-## Getting Started
+Starting point for CMS-driven, full-SSR Next.js sites. Encodes the
+performance/caching patterns proven in production (Netapp, sophos-home):
+one-query-per-page fetching with batched enrichment, CDN-first caching with
+purge-ready headers, and a CMS adapter seam so components never depend on the
+CMS.
 
-First, run the development server:
+**Working on this repo with an AI agent? [`AGENTS.md`](./AGENTS.md) is the
+operating manual** — architecture, invariants, and per-task playbooks
+(add Vercel, add Akamai, implement Contentstack, add a new CMS).
+
+## Quick start
 
 ```bash
+npm install
+cp .env.example .env.local   # fill in CMS credentials
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Without credentials the site boots to a setup notice. To wire a real
+Contentstack stack, follow [docs/playbooks/contentstack.md](./docs/playbooks/contentstack.md).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## What's inside
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Path | Purpose |
+| ---- | ------- |
+| `lib/cms/` | CMS adapter interface + Contentstack adapter (transport, retry, preview, normalize, enrichment) |
+| `lib/content/` | The app's content API: provider-shaped queries + mapping to app types |
+| `lib/cache/` | CDN cache headers, tag vocabulary, purge chain (no-op until a CDN is added) |
+| `components/sections/` | Section registry + sample section (the per-project pattern to copy) |
+| `app/[[...slug]]/` | Catch-all SSR route — one CMS query per page |
+| `app/api/webhooks/cms/purge/` | CMS publish webhook → CDN purge pipeline |
+| `proxy.ts` | Stamps CDN cache directives on every page response |
+| `docs/playbooks/` | Step-by-step guides for extending the stack |
 
-## Learn More
+## Design decisions (short version)
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Full SSR; the CDN is the only cache.** No ISR, no Next data cache — they
+  can't be purged by CDN tag purges. Headers: `Cache-Control` (browser) +
+  `CDN-Cache-Control` (any CDN), tunable via `CDN_CACHE_S_MAXAGE` /
+  `CDN_CACHE_STALE_WHILE_REVALIDATE`.
+- **One page = one GraphQL query** (kills the page→sections N+1). Connections
+  that would blow provider limits are fetched uid-only and hydrated by a
+  batched, parallel enrichment pass.
+- **Adapter for connection, not for queries.** `CMS_PROVIDER` selects the
+  adapter (endpoint/auth/preview/webhook mapping); query documents stay
+  provider-native in `lib/content/queries/` — masking them was deliberate
+  over-abstraction we rejected.
+- **Purge-ready from day 0.** Responses carry purgeable-tag plumbing and the
+  webhook route runs end-to-end as a structured no-op; adding Vercel/Akamai
+  is a playbook, not a redesign.
