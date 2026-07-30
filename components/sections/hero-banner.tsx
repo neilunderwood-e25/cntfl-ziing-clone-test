@@ -49,7 +49,11 @@ export function HeroBanner({ section }: { section: Section }) {
         {data.ctaUrl ? (
           <Link
             href={data.ctaUrl}
-            className="mt-2 rounded-md bg-white px-6 py-3 font-semibold text-black"
+            className={
+              image?.url
+                ? "mt-2 rounded-md bg-white px-6 py-3 font-semibold text-black"
+                : "mt-2 rounded-md bg-black px-6 py-3 font-semibold text-white"
+            }
           >
             {data.ctaLabel ?? "Learn more"}
           </Link>
