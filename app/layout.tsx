@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   // TODO(project): set the site's default title/description (page-level values
   // come from the CMS via generateMetadata in app/[[...slug]]/page.tsx).
   title: "Next CMS Boilerplate",
-  description: "Full-SSR, CDN-cached, CMS-agnostic Next.js starter",
+  description: "Full-SSR, CDN-cached Next.js + Contentstack starter",
 };
 
 export default function RootLayout({

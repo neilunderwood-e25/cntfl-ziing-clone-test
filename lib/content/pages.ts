@@ -16,7 +16,7 @@ import {
   type EnrichmentConfig,
 } from "@/lib/cms/contentstack";
 import type { PreviewContext } from "@/lib/cms/types";
-import type { Page, Section } from "@/types/content";
+import type { Page, Section } from "@/types/contentstack";
 import { GET_PAGE_BY_URL } from "./queries/page";
 
 /**

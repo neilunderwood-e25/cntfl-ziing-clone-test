@@ -1,21 +1,17 @@
 /**
- * The CMS adapter contract — the ONLY seam between this codebase and any
- * headless CMS.
+ * The CMS client contract — the ONLY seam between this codebase and the CMS.
  *
- * Everything above this interface (components, lib/content, app routes) is
- * CMS-agnostic: it talks to `lib/cms` and consumes the app-level types in
- * `types/content.ts`. Everything below it (lib/cms/<provider>/) is
- * provider-specific: endpoints, auth, retry, preview routing, response-shape
- * quirks.
+ * Everything above it (components, lib/content, app routes) talks to
+ * `lib/cms`'s public API only; everything below it (lib/cms/<provider>/)
+ * owns endpoints, auth, retry, preview routing, and response-shape quirks.
+ * This version supports a single provider (Contentstack); the interface
+ * exists so infrastructure concerns stay behind one boundary, not to host
+ * multiple CMSs at once.
  *
  * DELIBERATE NON-GOAL — query abstraction: query documents are NOT masked
- * behind this interface. GraphQL schemas differ per CMS (Contentstack's
- * `all_x { items }` vs Contentful's `xCollection { items }`), so queries are
- * provider-specific project code living in `lib/content/queries/`. Devs (or
- * agents) author them against the active provider's schema and pass them to
- * `query()`, which handles endpoint/config/auth routing. Swapping CMS means
- * rewriting the queries + the thin mappers in `lib/content/`, never the
- * components. See docs/playbooks/add-cms-adapter.md.
+ * behind this interface (that was rejected as over-abstraction). Queries are
+ * provider-native project code in `lib/content/queries/`, passed to
+ * `query()`, which handles endpoint/config/auth routing.
  */
 
 export type SearchParams = Record<string, string | string[] | undefined>;
@@ -52,9 +48,8 @@ export interface CmsAdapter {
   isConfigured(): boolean;
 
   /**
-   * Execute a provider-native query document (GraphQL for Contentstack /
-   * Contentful). Handles endpoint selection, auth headers, retry/backoff and
-   * preview routing internally.
+   * Execute a provider-native query document. Handles endpoint selection,
+   * auth headers, retry/backoff and preview routing internally.
    */
   query<T>(document: string, options?: CmsQueryOptions): Promise<T>;
 

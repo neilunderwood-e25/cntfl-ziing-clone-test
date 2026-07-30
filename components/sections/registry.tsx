@@ -1,6 +1,6 @@
 import type { ComponentType } from "react";
-import type { Section } from "@/types/content";
-import { SampleSection } from "./sample-section";
+import type { Section } from "@/types/contentstack";
+import { HeroBanner } from "./hero-banner";
 
 /**
  * Section registry — maps a section's `__typename` to its component. This is
@@ -12,7 +12,7 @@ import { SampleSection } from "./sample-section";
  * page) and a visible marker in development.
  */
 const SECTION_COMPONENTS: Record<string, ComponentType<{ section: Section }>> = {
-  SampleSection,
+  HeroBanner,
 };
 
 export function SectionRenderer({ sections }: { sections: Section[] }) {

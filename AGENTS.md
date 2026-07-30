@@ -20,7 +20,6 @@ tell you exactly which seam each kind of task uses.
 | Deploying to / integrating **Vercel** (headers, purge)    | `docs/playbooks/add-vercel.md`      |
 | Putting **Akamai** in front (headers, Fast Purge)         | `docs/playbooks/add-akamai.md`      |
 | Building a project on **Contentstack** (queries, limits)  | `docs/playbooks/contentstack.md`    |
-| Adding a **new CMS** (Contentful, Sanity, …)              | `docs/playbooks/add-cms-adapter.md` |
 | Adding another CDN (Cloudflare, Fastly, CloudFront, …)    | `docs/playbooks/add-akamai.md` — same seams, swap the provider's header/purge API |
 
 After completing one of these integrations, **update the "Current stack state"
@@ -31,9 +30,9 @@ already wired and how new layers must chain onto existing ones.
 
 > Maintained by agents. Update when you add/remove a CMS, CDN, or purge layer.
 
-- **CMS**: `contentstack` adapter implemented (`lib/cms/contentstack/`), selected
-  via `CMS_PROVIDER`. Not yet pointed at a real stack — the sample content model
-  (`flexible_page` + `sample_section`) must be aligned to the project's model.
+- **CMS**: `contentstack` adapter implemented (`lib/cms/contentstack/`). Not
+  yet pointed at a real stack — the sample content model (`flexible_page` +
+  `hero_banner`) must exist in / be aligned to the project's stack.
 - **CDN layers (outermost first)**: none. Responses already carry
   `CDN-Cache-Control` so any CDN placed in front starts caching correctly.
 - **Cache purge**: no-op. Webhook route exists and authenticates
@@ -46,25 +45,27 @@ already wired and how new layers must chain onto existing ones.
 ## Architecture — the three layers and their one-way dependencies
 
 ```
-components/ + app/            render app-level types (types/content.ts)
+components/ + app/            render normalized content (types/contentstack.ts)
         ↓ calls
-lib/content/                  the app's content API: queries (provider-shaped,
-                              by design) + mapping into app-level types
+lib/content/                  the app's content API: queries + page fetch
         ↓ calls
-lib/cms/                      CmsAdapter interface + per-provider adapters
+lib/cms/                      CMS client boundary + the contentstack adapter
                               (transport, auth, retry, preview, shape quirks)
 lib/cache/                    CDN headers, tags, purge chain (CMS-independent)
 ```
 
-Rules that keep the boilerplate swappable:
+This version is **single-CMS (Contentstack)** — components consume the
+normalized (connection-flattened) Contentstack shapes directly via
+`types/contentstack.ts`; there is deliberately no extra CMS-agnostic mapping
+layer. The rules that keep the boundaries clean:
 
-1. **Components never import from `lib/cms/<provider>/` or mention a CMS.**
-   They consume `types/content.ts` shapes handed to them by `lib/content/`.
-2. **Queries are provider-specific ON PURPOSE.** We rejected masking query
-   documents behind the adapter (over-abstraction — GraphQL schemas differ per
-   CMS). Queries live in `lib/content/queries/` and are rewritten when the CMS
-   changes; the adapter only routes them to the right endpoint with the right
-   auth. Swap cost = queries + thin mappers, never components.
+1. **Components import `lib/content/` + `types/contentstack.ts`, never
+   `lib/cms/contentstack/` internals** — transport/config/preview stay behind
+   the `lib/cms` public API.
+2. **Queries are provider-native ON PURPOSE.** We rejected masking query
+   documents behind the client interface (over-abstraction). They live in
+   `lib/content/queries/`; the client only routes them to the right endpoint
+   with the right auth.
 3. **`lib/cache/` knows nothing about any CMS** except the neutral
    `PurgeTargets` type. The adapter translates webhook payloads into it.
 
@@ -95,9 +96,9 @@ Rules that keep the boilerplate swappable:
 
 ## Sample code you are expected to replace per project
 
-Marked `SAMPLE` in-file: `lib/content/queries/fragments/sample-section.ts`,
-the `SampleSection` spread in `lib/content/queries/page.ts`,
-`components/sections/sample-section.tsx`, its entry in
+Marked `SAMPLE` in-file: `lib/content/queries/fragments/hero-banner.ts`,
+the `HeroBanner` spread in `lib/content/queries/page.ts`,
+`components/sections/hero-banner.tsx`, its entry in
 `components/sections/registry.tsx`. The pattern (fragment → inline spread →
 component → registry entry) is the contract; the fields are placeholders.
 

@@ -1,9 +1,9 @@
 /**
  * CMS public API — the single entry point the rest of the app talks to.
  *
- * The active provider is selected by `CMS_PROVIDER` (default: contentstack).
- * To add a provider, implement `CmsAdapter` under lib/cms/<provider>/ and
- * register it in ADAPTERS. See docs/playbooks/add-cms-adapter.md.
+ * The active provider is selected by `CMS_PROVIDER` (default and currently
+ * only implementation: contentstack). A future provider would implement
+ * `CmsAdapter` under lib/cms/<provider>/ and register in ADAPTERS.
  */
 import { contentstackAdapter } from "./contentstack";
 import type { CmsAdapter, CmsQueryOptions, PreviewContext, SearchParams } from "./types";

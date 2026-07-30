@@ -18,6 +18,13 @@ Update "Current stack state" in `AGENTS.md` when the project is wired.
    POSTed to `https://graphql.contentstack.com/stacks/<api_key>?environment=<env>`
    with header `access_token: <delivery token>`.
 
+### Fresh/empty stack?
+
+`node scripts/create-content-model.mjs --with-entries` (needs
+`CONTENTSTACK_MANAGEMENT_TOKEN` in `.env.local`) creates the sample model
+(`flexible_page` + `hero_banner`), seeds a published home page, and the app
+renders end-to-end. Safe to re-run; skips anything that already exists.
+
 ## 2. Content model contract
 
 The routing/caching design assumes the housing page type (`flexible_page`)
@@ -36,7 +43,7 @@ Per new section content type:
 2. Inline `... on <Type>` spread + fragment registration in
    `lib/content/queries/page.ts`.
 3. Component in `components/sections/<name>.tsx` typed against
-   `types/content.ts`.
+   `types/contentstack.ts`.
 4. Registry entry in `components/sections/registry.tsx`
    (GraphQL `__typename` = PascalCase of the content-type uid).
 

@@ -1,9 +1,8 @@
 import { buildQuery, gql } from "@/lib/cms/graphql";
-import { SAMPLE_SECTION_FRAGMENT } from "./fragments/sample-section";
+import { HERO_BANNER_FRAGMENT } from "./fragments/hero-banner";
 
 /**
- * Main page query — Contentstack-shaped (queries are provider-specific by
- * design; see lib/cms/types.ts).
+ * Main page query.
  *
  * THE N+1 RULE: one page = ONE query. `flexible_page` stores its FULL public
  * path in `url`, so any request path maps directly to `where: { url }` — no
@@ -30,8 +29,8 @@ const OPERATION = gql`
           edges {
             node {
               __typename
-              ... on SampleSection {
-                ...SampleSectionFields
+              ... on HeroBanner {
+                ...HeroBannerFields
               }
             }
           }
@@ -41,4 +40,4 @@ const OPERATION = gql`
   }
 `;
 
-export const GET_PAGE_BY_URL = buildQuery(OPERATION, [SAMPLE_SECTION_FRAGMENT]);
+export const GET_PAGE_BY_URL = buildQuery(OPERATION, [HERO_BANNER_FRAGMENT]);
