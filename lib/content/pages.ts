@@ -11,31 +11,31 @@
 import { cache } from "react";
 import { cmsQuery } from "@/lib/cms";
 import {
-  enrichConnections,
-  flattenConnections,
+  enrichCollections,
+  flattenCollections,
   type EnrichmentConfig,
-} from "@/lib/cms/contentstack";
+} from "@/lib/cms/contentful";
 import type { PreviewContext } from "@/lib/cms/types";
-import type { Page, Section } from "@/types/contentstack";
+import type { Page, Section } from "@/types/contentful";
 import { GET_PAGE_BY_URL } from "./queries/page";
 
 /**
- * Reference connections fetched UID-ONLY in the main query and hydrated by
- * the bulked enrichment pass. Empty until a connection has to be pulled out
- * of the main query to stay inside Contentstack's depth/document limits —
- * worked example in docs/playbooks/contentstack.md.
+ * Reference collections fetched shallow (`__typename sys { id }`) in the main
+ * query and hydrated by the bulked enrichment pass. Empty until a collection
+ * has to be pulled out of the main query to stay inside Contentful's query
+ * complexity budget — worked example in docs/playbooks/contentful.md.
  */
 const ENRICHMENTS: EnrichmentConfig[] = [];
 
 type PageQueryResult = {
-  all_flexible_page?: {
+  flexiblePageCollection?: {
     items?: Array<Record<string, unknown> | null> | null;
   } | null;
 };
 
-/** The page item after connection-flattening. */
+/** The page item after collection-flattening. */
 type NormalizedPageItem = {
-  system: Page["system"];
+  sys: Page["sys"];
   title?: string | null;
   url?: string | null;
   sections?: Section[] | null;
@@ -47,16 +47,16 @@ async function queryPage(url: string, preview: PreviewContext | null): Promise<P
     preview,
   });
 
-  const rawItem = data.all_flexible_page?.items?.[0];
+  const rawItem = data.flexiblePageCollection?.items?.[0];
   if (!rawItem) return null;
 
-  // Hydrate any uid-only reference connections pulled out of the main query,
-  // then normalize connections → arrays.
-  const enriched = await enrichConnections(rawItem, ENRICHMENTS, { preview });
-  const item = flattenConnections<NormalizedPageItem>(enriched);
+  // Hydrate any shallow reference collections pulled out of the main query,
+  // then normalize collections → arrays.
+  const enriched = await enrichCollections(rawItem, ENRICHMENTS, { preview });
+  const item = flattenCollections<NormalizedPageItem>(enriched);
 
   return {
-    system: item.system,
+    sys: item.sys,
     title: item.title ?? null,
     url: item.url ?? null,
     sections: item.sections ?? [],

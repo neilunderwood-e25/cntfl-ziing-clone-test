@@ -1,36 +1,34 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { CsAsset, CsLink, EntrySystem, Section } from "@/types/contentstack";
+import type { CfAsset, Section, Sys } from "@/types/contentful";
 
 /**
  * SAMPLE — the reference implementation of a section component. Every real
  * section follows this pattern: narrow the generic `Section` to the section's
  * own field shape, render, and register in ./registry.tsx.
- *
- * `image` is an asset connection, so after flattening it arrives as a
- * 1-element array (consume with `[0]`).
  */
 type HeroBannerData = {
   __typename: "HeroBanner";
-  system?: EntrySystem;
+  sys?: Sys;
   heading?: string | null;
-  sub_heading?: string | null;
-  image?: CsAsset[] | null;
-  cta?: CsLink | null;
+  subHeading?: string | null;
+  image?: CfAsset | null;
+  ctaLabel?: string | null;
+  ctaUrl?: string | null;
 };
 
 export function HeroBanner({ section }: { section: Section }) {
   const data = section as HeroBannerData;
-  const image = data.image?.[0];
+  const image = data.image;
 
   return (
-    <section data-section="hero_banner" className="relative isolate">
+    <section data-section="hero-banner" className="relative isolate">
       {image?.url ? (
         <Image
           src={image.url}
           alt={image.title ?? ""}
-          width={image.dimension?.width ?? 1920}
-          height={image.dimension?.height ?? 720}
+          width={image.width ?? 1920}
+          height={image.height ?? 720}
           priority
           className="h-[60vh] w-full object-cover"
         />
@@ -45,15 +43,15 @@ export function HeroBanner({ section }: { section: Section }) {
         {data.heading ? (
           <h1 className="max-w-3xl text-4xl font-bold md:text-6xl">{data.heading}</h1>
         ) : null}
-        {data.sub_heading ? (
-          <p className="max-w-2xl text-lg md:text-xl">{data.sub_heading}</p>
+        {data.subHeading ? (
+          <p className="max-w-2xl text-lg md:text-xl">{data.subHeading}</p>
         ) : null}
-        {data.cta?.href ? (
+        {data.ctaUrl ? (
           <Link
-            href={data.cta.href}
+            href={data.ctaUrl}
             className="mt-2 rounded-md bg-white px-6 py-3 font-semibold text-black"
           >
-            {data.cta.title ?? "Learn more"}
+            {data.ctaLabel ?? "Learn more"}
           </Link>
         ) : null}
       </div>

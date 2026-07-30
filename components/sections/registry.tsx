@@ -1,5 +1,5 @@
 import type { ComponentType } from "react";
-import type { Section } from "@/types/contentstack";
+import type { Section } from "@/types/contentful";
 import { HeroBanner } from "./hero-banner";
 
 /**
@@ -20,7 +20,7 @@ export function SectionRenderer({ sections }: { sections: Section[] }) {
     <>
       {sections.map((section, index) => {
         const Component = SECTION_COMPONENTS[section.__typename];
-        const key = section.system?.uid ?? `${section.__typename}-${index}`;
+        const key = section.sys?.id ?? `${section.__typename}-${index}`;
 
         if (!Component) {
           if (process.env.NODE_ENV !== "production") {

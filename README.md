@@ -1,6 +1,6 @@
 # next-cms-boilerplate
 
-Starting point for Contentstack-driven, full-SSR Next.js sites. Encodes the
+Starting point for Contentful-driven, full-SSR Next.js sites. Encodes the
 performance/caching patterns proven in production (Netapp, sophos-home):
 one-query-per-page fetching with batched enrichment, CDN-first caching with
 purge-ready headers, and a thin CMS client boundary that keeps transport,
@@ -8,7 +8,7 @@ auth, preview and retry concerns out of app code.
 
 **Working on this repo with an AI agent? [`AGENTS.md`](./AGENTS.md) is the
 operating manual** — architecture, invariants, and per-task playbooks
-(add Vercel, add Akamai, implement a Contentstack project).
+(add Vercel, add Akamai, implement a Contentful project).
 
 ## Quick start
 
@@ -19,13 +19,15 @@ npm run dev
 ```
 
 Without credentials the site boots to a setup notice. To wire a real
-Contentstack stack, follow [docs/playbooks/contentstack.md](./docs/playbooks/contentstack.md).
+Contentful space, follow [docs/playbooks/contentful.md](./docs/playbooks/contentful.md) —
+on an empty space, `node scripts/create-content-model.mjs --with-entries`
+creates the sample model and a published home page.
 
 ## What's inside
 
 | Path | Purpose |
 | ---- | ------- |
-| `lib/cms/` | CMS client boundary + Contentstack adapter (transport, retry, preview, normalize, enrichment) |
+| `lib/cms/` | CMS client boundary + Contentful adapter (transport, retry, preview, normalize, enrichment) |
 | `lib/content/` | The app's content API: queries + the one-per-request page fetch |
 | `lib/cache/` | CDN cache headers, tag vocabulary, purge chain (no-op until a CDN is added) |
 | `components/sections/` | Section registry + sample section (the per-project pattern to copy) |
@@ -46,7 +48,7 @@ Contentstack stack, follow [docs/playbooks/contentstack.md](./docs/playbooks/con
 - **Client boundary for connection, not for queries.** `lib/cms` owns
   endpoint/auth/preview/webhook mapping; query documents stay provider-native
   in `lib/content/queries/` — masking them was deliberate over-abstraction we
-  rejected. Single CMS (Contentstack) in this version.
+  rejected. Single CMS (Contentful) in this version.
 - **Purge-ready from day 0.** Responses carry purgeable-tag plumbing and the
   webhook route runs end-to-end as a structured no-op; adding Vercel/Akamai
   is a playbook, not a redesign.

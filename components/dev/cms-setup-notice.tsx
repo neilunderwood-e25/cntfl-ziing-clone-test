@@ -19,7 +19,7 @@ export function CmsSetupNotice({ provider }: { provider: string }) {
         <li>Restart the dev server</li>
       </ol>
       <p>
-        Full setup guide: <code>docs/playbooks/contentstack.md</code> · Architecture:{" "}
+        Full setup guide: <code>docs/playbooks/contentful.md</code> · Architecture:{" "}
         <code>AGENTS.md</code>
       </p>
     </main>

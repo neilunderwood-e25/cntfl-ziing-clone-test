@@ -19,7 +19,7 @@ tell you exactly which seam each kind of task uses.
 | Anything touching caching, TTLs, or response headers      | `docs/playbooks/caching.md`         |
 | Deploying to / integrating **Vercel** (headers, purge)    | `docs/playbooks/add-vercel.md`      |
 | Putting **Akamai** in front (headers, Fast Purge)         | `docs/playbooks/add-akamai.md`      |
-| Building a project on **Contentstack** (queries, limits)  | `docs/playbooks/contentstack.md`    |
+| Building a project on **Contentful** (queries, limits)    | `docs/playbooks/contentful.md`      |
 | Adding another CDN (Cloudflare, Fastly, CloudFront, …)    | `docs/playbooks/add-akamai.md` — same seams, swap the provider's header/purge API |
 
 After completing one of these integrations, **update the "Current stack state"
@@ -30,9 +30,10 @@ already wired and how new layers must chain onto existing ones.
 
 > Maintained by agents. Update when you add/remove a CMS, CDN, or purge layer.
 
-- **CMS**: `contentstack` adapter implemented (`lib/cms/contentstack/`). Not
-  yet pointed at a real stack — the sample content model (`flexible_page` +
-  `hero_banner`) must exist in / be aligned to the project's stack.
+- **CMS**: `contentful` adapter implemented (`lib/cms/contentful/`). Not yet
+  pointed at a real space — the sample content model (`flexiblePage` +
+  `heroBanner`) must exist in / be aligned to the project's space
+  (`scripts/create-content-model.mjs` seeds it on an empty space).
 - **CDN layers (outermost first)**: none. Responses already carry
   `CDN-Cache-Control` so any CDN placed in front starts caching correctly.
 - **Cache purge**: no-op. Webhook route exists and authenticates
@@ -45,22 +46,22 @@ already wired and how new layers must chain onto existing ones.
 ## Architecture — the three layers and their one-way dependencies
 
 ```
-components/ + app/            render normalized content (types/contentstack.ts)
+components/ + app/            render normalized content (types/contentful.ts)
         ↓ calls
 lib/content/                  the app's content API: queries + page fetch
         ↓ calls
-lib/cms/                      CMS client boundary + the contentstack adapter
+lib/cms/                      CMS client boundary + the contentful adapter
                               (transport, auth, retry, preview, shape quirks)
 lib/cache/                    CDN headers, tags, purge chain (CMS-independent)
 ```
 
-This version is **single-CMS (Contentstack)** — components consume the
-normalized (connection-flattened) Contentstack shapes directly via
-`types/contentstack.ts`; there is deliberately no extra CMS-agnostic mapping
+This version is **single-CMS (Contentful)** — components consume the
+normalized (collection-flattened) Contentful shapes directly via
+`types/contentful.ts`; there is deliberately no extra CMS-agnostic mapping
 layer. The rules that keep the boundaries clean:
 
-1. **Components import `lib/content/` + `types/contentstack.ts`, never
-   `lib/cms/contentstack/` internals** — transport/config/preview stay behind
+1. **Components import `lib/content/` + `types/contentful.ts`, never
+   `lib/cms/contentful/` internals** — transport/config/preview stay behind
    the `lib/cms` public API.
 2. **Queries are provider-native ON PURPOSE.** We rejected masking query
    documents behind the client interface (over-abstraction). They live in
@@ -77,18 +78,19 @@ layer. The rules that keep the boundaries clean:
   stale content behind them. CMS fetches use `cache: "no-store"`.
 - **One page = one query** (the N+1 fix). The page entry stores its FULL path
   in `url`; the catch-all route does a single `where: { url }` fetch. When
-  provider limits force a connection out of the main query, it is fetched
-  uid-only and hydrated by the **batched enrichment pass**
-  (`lib/cms/contentstack/enrichment.ts`) — never by per-item fetches.
+  provider limits force a collection out of the main query, it is fetched
+  shallow (`sys { id }`) and hydrated by the **batched enrichment pass**
+  (`lib/cms/contentful/enrichment.ts`) — never by per-item fetches.
 - **Request-level dedup with React `cache()`** (`lib/content/pages.ts`):
   `generateMetadata` + page render share one fetch. GraphQL POSTs are NOT
   memoized by Next's fetch memoization. Preview bypasses the cache.
 - **`proxy.ts` stays fast**: no data fetching in it, ever (the full-URL lookup
   strategy exists precisely to avoid slug-resolution fetches there).
 - **Preview responses are `private, no-store`** at every cache layer.
-- **Purge webhook returns 200 even when a purge fails** (5xx makes
-  Contentstack disable the webhook after repeated retries — worse than one
-  missed purge). Alert on the `purge failure` error log instead.
+- **Purge webhook returns 200 even when a purge fails** (some CMSs disable a
+  webhook after repeated 5xx — a production incident on the Netapp project —
+  and one missed purge is the lesser evil). Alert on the `purge failure`
+  error log instead.
 - **Cache tags**: lowercase `[a-z0-9_-]`, no colons (Akamai's charset is the
   lowest common denominator). Always create tags via `lib/cache/tags.ts`.
 - **No heavy CMS SDKs / Apollo.** The GraphQL client is a native-fetch POST
@@ -107,6 +109,6 @@ component → registry entry) is the contract; the fields are placeholders.
 - `npm run build` and `npm run lint` must pass.
 - If you touched caching: `npm run build && npm run start`, then curl a page
   and assert the `CDN-Cache-Control` header (and `private, no-store` with
-  `?live_preview=x`).
-- If you touched the data layer against a real stack: verify a page URL
+  `?preview=x`).
+- If you touched the data layer against a real space: verify a page URL
   returns 200 with sections rendered, and an unknown URL 404s.

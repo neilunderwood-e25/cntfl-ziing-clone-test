@@ -77,9 +77,10 @@ closes the window. So with Vercel behind Akamai: `PURGERS = [vercel, akamai]`.
 Webhook policies (production lessons, keep them):
 
 - **Always 200 for authenticated well-formed events, even on purge failure.**
-  Contentstack disables a webhook after repeated 5xx retries — losing ALL
-  future purges to save one. The SWR window backstops a missed purge. Alert on
-  the `[cms-purge-webhook] purge failure` error log.
+  Some CMSs disable a webhook after repeated 5xx retries (this bit the Netapp
+  project in production with Contentstack) — losing ALL future purges to save
+  one. The SWR window backstops a missed purge. Alert on the
+  `[cms-purge-webhook] purge failure` error log.
 - Purgers must resolve `{ ok: true, skipped: true }` when their credentials
   are missing (never throw), and retry transient 429/5xx with bounded backoff
   honoring `Retry-After`.

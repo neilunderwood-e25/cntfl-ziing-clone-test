@@ -1,37 +1,28 @@
 import { gql } from "@/lib/cms/graphql";
 
 /**
- * SAMPLE — `hero_banner` section fragment (GraphQL typename = PascalCase of
- * the content-type uid). One fragment file per section keeps queries
- * reviewable; copy this pattern for real sections.
+ * SAMPLE — `heroBanner` section fragment (GraphQL typename is the PascalCase
+ * of the content-type id). Replace with the project's real sections; one
+ * fragment file per section keeps queries reviewable.
  *
- * The asset connection carries no `limit:` — Contentstack rejects it on
- * asset/single-reference connections (only multiple-reference connections
- * accept it; see docs/playbooks/contentstack.md §5).
+ * Assets and single references are direct objects in Contentful's GraphQL
+ * schema — only multi-reference fields are `*Collection`s, and those must
+ * carry a `limit:` (see docs/playbooks/contentful.md §5).
  */
 export const HERO_BANNER_FRAGMENT = gql`
   fragment HeroBannerFields on HeroBanner {
-    system {
-      uid
-      content_type_uid
+    sys {
+      id
     }
     heading
-    sub_heading
-    imageConnection {
-      edges {
-        node {
-          url
-          title
-          dimension {
-            height
-            width
-          }
-        }
-      }
-    }
-    cta {
+    subHeading
+    image {
+      url
       title
-      href
+      width
+      height
     }
+    ctaLabel
+    ctaUrl
   }
 `;

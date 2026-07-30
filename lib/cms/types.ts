@@ -4,7 +4,7 @@
  * Everything above it (components, lib/content, app routes) talks to
  * `lib/cms`'s public API only; everything below it (lib/cms/<provider>/)
  * owns endpoints, auth, retry, preview routing, and response-shape quirks.
- * This version supports a single provider (Contentstack); the interface
+ * This version supports a single provider (Contentful); the interface
  * exists so infrastructure concerns stay behind one boundary, not to host
  * multiple CMSs at once.
  *
@@ -60,8 +60,10 @@ export interface CmsAdapter {
   hasPreviewSignal(searchParams: URLSearchParams): boolean;
 
   /**
-   * Map a publish/unpublish/delete webhook payload to purge targets.
+   * Map a publish/unpublish/delete webhook event to purge targets. Some
+   * providers carry the event kind in a header (Contentful's
+   * `X-Contentful-Topic`), so the request headers are passed through.
    * Non-purge events (drafts, workflow noise) return empty targets.
    */
-  webhookToPurgeTargets(payload: unknown): PurgeTargets;
+  webhookToPurgeTargets(payload: unknown, headers?: Headers): PurgeTargets;
 }

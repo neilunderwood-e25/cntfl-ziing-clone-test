@@ -1,27 +1,26 @@
 /**
  * One-time seeder: creates the boilerplate's sample content model in a
- * Contentstack stack via the Management API, and (with --with-entries) a
- * published home page so the app renders end-to-end immediately.
+ * Contentful space via the Content Management API, and (with --with-entries)
+ * a published home page so the app renders end-to-end immediately.
  *
- *   node scripts/create-content-model.mjs               # content types only
+ *   node scripts/create-content-model.mjs                # content types only
  *   node scripts/create-content-model.mjs --with-entries # + home page + publish
  *
- * Reads .env.local: CONTENTSTACK_API_KEY, CONTENTSTACK_MANAGEMENT_TOKEN,
- * CONTENTSTACK_ENVIRONMENT (for publishing), optional CONTENTSTACK_BRANCH /
- * CONTENTSTACK_API_HOST. Existing content types/entries are left untouched
- * (409/422 duplicates are reported and skipped), so re-running is safe.
+ * Reads .env.local: CONTENTFUL_SPACE_ID, CONTENTFUL_MANAGEMENT_TOKEN,
+ * optional CONTENTFUL_ENVIRONMENT (default master). Existing content
+ * types/entries are left untouched (found → skipped), so re-running is safe.
  *
  * Model (mirrors the field shapes the sample code queries — keep
- * lib/content/queries/fragments/hero-banner.ts in sync if you change it):
- *   flexible_page: title, url (FULL public path — the routing contract),
- *                  sections → [hero_banner]
- *   hero_banner:   title, heading, sub_heading, image (file), cta (link)
+ * lib/content/queries/fragments/hero-banner.ts in sync if you change it;
+ * structure follows the proven Contentstack flexible_page pattern: the page
+ * stores its FULL public path in `url` and composes section references):
+ *   flexiblePage: title, url (unique), sections → [heroBanner]
+ *   heroBanner:   title, heading, subHeading, image (asset), ctaLabel, ctaUrl
  */
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 const WITH_ENTRIES = process.argv.includes("--with-entries");
-const LOCALE = "en-us";
 
 function loadEnvLocal() {
   let raw;
@@ -39,25 +38,24 @@ function loadEnvLocal() {
 
 loadEnvLocal();
 
-const API_KEY = process.env.CONTENTSTACK_API_KEY;
-const MGMT_TOKEN = process.env.CONTENTSTACK_MANAGEMENT_TOKEN;
-const ENVIRONMENT = process.env.CONTENTSTACK_ENVIRONMENT;
-const BRANCH = process.env.CONTENTSTACK_BRANCH || "main";
-const HOST = process.env.CONTENTSTACK_API_HOST || "api.contentstack.io";
+const SPACE = process.env.CONTENTFUL_SPACE_ID;
+const MGMT_TOKEN = process.env.CONTENTFUL_MANAGEMENT_TOKEN;
+const ENVIRONMENT = process.env.CONTENTFUL_ENVIRONMENT || "master";
 
-if (!API_KEY || !MGMT_TOKEN) {
-  console.error("✗ CONTENTSTACK_API_KEY and CONTENTSTACK_MANAGEMENT_TOKEN are required in .env.local");
+if (!SPACE || !MGMT_TOKEN) {
+  console.error("✗ CONTENTFUL_SPACE_ID and CONTENTFUL_MANAGEMENT_TOKEN are required in .env.local");
   process.exit(1);
 }
 
-async function api(method, path, body) {
-  const res = await fetch(`https://${HOST}/v3${path}`, {
+const BASE = `https://api.contentful.com/spaces/${SPACE}/environments/${ENVIRONMENT}`;
+
+async function api(method, path, body, extraHeaders = {}) {
+  const res = await fetch(`${BASE}${path}`, {
     method,
     headers: {
-      api_key: API_KEY,
-      authorization: MGMT_TOKEN,
-      branch: BRANCH,
-      "content-type": "application/json",
+      authorization: `Bearer ${MGMT_TOKEN}`,
+      "content-type": "application/vnd.contentful.management.v1+json",
+      ...extraHeaders,
     },
     body: body ? JSON.stringify(body) : undefined,
   });
@@ -65,113 +63,159 @@ async function api(method, path, body) {
   return { status: res.status, json };
 }
 
-const DEFAULT_TITLE_FIELD = {
-  data_type: "text",
-  display_name: "Title",
-  uid: "title",
-  field_metadata: { _default: true, version: 3 },
-  mandatory: true,
-  unique: true,
-  multiple: false,
-  non_localizable: false,
-};
-
 const CONTENT_TYPES = [
   {
-    content_type: {
-      title: "Hero Banner",
-      uid: "hero_banner",
-      options: { is_page: false, singleton: false, title: "title", sub_title: [] },
-      schema: [
-        DEFAULT_TITLE_FIELD,
-        { data_type: "text", display_name: "Heading", uid: "heading", multiple: false, mandatory: false, unique: false, non_localizable: false, field_metadata: { description: "", default_value: "", version: 3 } },
-        { data_type: "text", display_name: "Sub Heading", uid: "sub_heading", multiple: false, mandatory: false, unique: false, non_localizable: false, field_metadata: { description: "", default_value: "", version: 3 } },
-        { data_type: "file", display_name: "Image", uid: "image", multiple: false, mandatory: false, unique: false, non_localizable: false, field_metadata: { description: "", rich_text_type: "standard" } },
-        { data_type: "link", display_name: "CTA", uid: "cta", multiple: false, mandatory: false, unique: false, non_localizable: false, field_metadata: { description: "", default_value: { title: "", url: "" } } },
+    id: "heroBanner",
+    body: {
+      name: "Hero Banner",
+      description: "SAMPLE section — replace per project",
+      displayField: "title",
+      fields: [
+        { id: "title", name: "Title", type: "Symbol", required: true },
+        { id: "heading", name: "Heading", type: "Symbol" },
+        { id: "subHeading", name: "Sub Heading", type: "Symbol" },
+        { id: "image", name: "Image", type: "Link", linkType: "Asset" },
+        { id: "ctaLabel", name: "CTA Label", type: "Symbol" },
+        { id: "ctaUrl", name: "CTA URL", type: "Symbol" },
       ],
     },
   },
   {
-    content_type: {
-      title: "Flexible Page",
-      uid: "flexible_page",
-      // is_page gives the entry a URL field; entries store the FULL public
-      // path there (the routing contract — see AGENTS.md).
-      options: { is_page: true, singleton: false, title: "title", sub_title: [], url_pattern: "/:title", url_prefix: "/" },
-      schema: [
-        DEFAULT_TITLE_FIELD,
-        { data_type: "text", display_name: "URL", uid: "url", field_metadata: { _default: true, version: 3 }, multiple: false, unique: false, mandatory: false, non_localizable: false },
-        { data_type: "reference", display_name: "Sections", uid: "sections", reference_to: ["hero_banner"], field_metadata: { ref_multiple: true, ref_multiple_content_types: true, default_value: null }, mandatory: false, multiple: false, unique: false, non_localizable: false },
+    id: "flexiblePage",
+    body: {
+      name: "Flexible Page",
+      description: "Housing page type — url stores the FULL public path (routing contract)",
+      displayField: "title",
+      fields: [
+        { id: "title", name: "Title", type: "Symbol", required: true },
+        {
+          id: "url",
+          name: "URL",
+          type: "Symbol",
+          required: true,
+          validations: [{ unique: true }],
+        },
+        {
+          id: "sections",
+          name: "Sections",
+          type: "Array",
+          items: {
+            type: "Link",
+            linkType: "Entry",
+            validations: [{ linkContentType: ["heroBanner"] }],
+          },
+        },
       ],
     },
   },
 ];
 
 async function createContentTypes() {
-  for (const body of CONTENT_TYPES) {
-    const uid = body.content_type.uid;
-    const { status, json } = await api("POST", "/content_types", body);
-    if (status === 201) console.log(`✓ content type created: ${uid}`);
-    else if (status === 409 || json?.error_code === 115)
-      console.log(`• content type already exists, skipped: ${uid}`);
-    else {
-      console.error(`✗ failed creating ${uid} (HTTP ${status}):`, JSON.stringify(json));
+  for (const { id, body } of CONTENT_TYPES) {
+    const existing = await api("GET", `/content_types/${id}`);
+    if (existing.status === 200) {
+      console.log(`• content type already exists, skipped: ${id}`);
+      continue;
+    }
+
+    const created = await api("PUT", `/content_types/${id}`, body);
+    if (created.status !== 201) {
+      console.error(`✗ failed creating ${id} (HTTP ${created.status}):`, JSON.stringify(created.json));
       process.exit(1);
     }
-  }
-}
 
-async function createEntry(ctUid, entry) {
-  const { status, json } = await api("POST", `/content_types/${ctUid}/entries?locale=${LOCALE}`, { entry });
-  if (status === 201) {
-    console.log(`✓ entry created: ${ctUid} "${entry.title}" (${json.entry.uid})`);
-    return json.entry.uid;
-  }
-  if (json?.error_code === 119 && JSON.stringify(json).includes("unique")) {
-    // Duplicate title — find the existing entry instead.
-    const found = await api("GET", `/content_types/${ctUid}/entries?locale=${LOCALE}&query=${encodeURIComponent(JSON.stringify({ title: entry.title }))}`);
-    const existing = found.json?.entries?.[0];
-    if (existing) {
-      console.log(`• entry already exists, reusing: ${ctUid} "${entry.title}" (${existing.uid})`);
-      return existing.uid;
+    const activated = await api("PUT", `/content_types/${id}/published`, null, {
+      "x-contentful-version": String(created.json.sys.version),
+    });
+    if (activated.status !== 200) {
+      console.error(`✗ failed activating ${id} (HTTP ${activated.status}):`, JSON.stringify(activated.json));
+      process.exit(1);
     }
+    console.log(`✓ content type created + activated: ${id}`);
   }
-  console.error(`✗ failed creating entry in ${ctUid} (HTTP ${status}):`, JSON.stringify(json));
-  process.exit(1);
 }
 
-async function publishEntry(ctUid, entryUid) {
-  if (!ENVIRONMENT) {
-    console.error("✗ CONTENTSTACK_ENVIRONMENT required to publish");
-    process.exit(1);
+async function getDefaultLocale() {
+  const { status, json } = await api("GET", "/locales");
+  if (status !== 200) return "en-US";
+  return json.items?.find((l) => l.default)?.code ?? "en-US";
+}
+
+async function findEntry(contentType, field, value) {
+  const query = `content_type=${contentType}&fields.${field}=${encodeURIComponent(value)}&limit=1`;
+  const { status, json } = await api("GET", `/entries?${query}`);
+  if (status === 200 && json.items?.length) return json.items[0];
+  return null;
+}
+
+async function createEntry(contentType, matchField, fields, locale) {
+  const localized = Object.fromEntries(
+    Object.entries(fields).map(([key, value]) => [key, { [locale]: value }]),
+  );
+
+  const existing = await findEntry(contentType, matchField, fields[matchField]);
+  if (existing) {
+    console.log(`• entry already exists, reusing: ${contentType} "${fields.title}" (${existing.sys.id})`);
+    return existing;
   }
-  const { status, json } = await api("POST", `/content_types/${ctUid}/entries/${entryUid}/publish`, {
-    entry: { environments: [ENVIRONMENT], locales: [LOCALE] },
+
+  const { status, json } = await api("POST", "/entries", { fields: localized }, {
+    "x-contentful-content-type": contentType,
   });
-  if (status === 200 || status === 201) console.log(`✓ published: ${ctUid}/${entryUid} → ${ENVIRONMENT}`);
-  else {
-    console.error(`✗ publish failed for ${ctUid}/${entryUid} (HTTP ${status}):`, JSON.stringify(json));
+  if (status !== 201) {
+    console.error(`✗ failed creating entry in ${contentType} (HTTP ${status}):`, JSON.stringify(json));
     process.exit(1);
   }
+  console.log(`✓ entry created: ${contentType} "${fields.title}" (${json.sys.id})`);
+  return json;
+}
+
+async function publishEntry(entry) {
+  const { sys } = entry;
+  if (sys.publishedVersion && sys.version === sys.publishedVersion + 1) {
+    console.log(`• already published: ${sys.id}`);
+    return;
+  }
+  const { status, json } = await api("PUT", `/entries/${sys.id}/published`, null, {
+    "x-contentful-version": String(sys.version),
+  });
+  if (status !== 200) {
+    console.error(`✗ publish failed for ${sys.id} (HTTP ${status}):`, JSON.stringify(json));
+    process.exit(1);
+  }
+  console.log(`✓ published: ${sys.id}`);
 }
 
 await createContentTypes();
 
 if (WITH_ENTRIES) {
-  const heroUid = await createEntry("hero_banner", {
-    title: "Sample Hero Banner",
-    heading: "Welcome to the boilerplate",
-    sub_heading: "Full-SSR, CDN-cached, one query per page.",
-    cta: { title: "Read the docs", href: "/docs" },
-  });
-  await publishEntry("hero_banner", heroUid);
+  const locale = await getDefaultLocale();
 
-  const pageUid = await createEntry("flexible_page", {
-    title: "Home",
-    url: "/",
-    sections: [{ uid: heroUid, _content_type_uid: "hero_banner" }],
-  });
-  await publishEntry("flexible_page", pageUid);
+  const hero = await createEntry(
+    "heroBanner",
+    "title",
+    {
+      title: "Sample Hero Banner",
+      heading: "Welcome to the boilerplate",
+      subHeading: "Full-SSR, CDN-cached, one query per page.",
+      ctaLabel: "Read the docs",
+      ctaUrl: "/docs",
+    },
+    locale,
+  );
+  await publishEntry(hero);
+
+  const page = await createEntry(
+    "flexiblePage",
+    "url",
+    {
+      title: "Home",
+      url: "/",
+      sections: [{ sys: { type: "Link", linkType: "Entry", id: hero.sys.id } }],
+    },
+    locale,
+  );
+  await publishEntry(page);
 
   console.log("\nDone. Start the app (npm run dev) and open http://localhost:3000/");
 } else {

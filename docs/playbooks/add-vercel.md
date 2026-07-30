@@ -60,6 +60,6 @@ Create `lib/cache/purgers/vercel.ts` implementing `CdnPurger`:
   second `HIT`; confirm no `private, no-store` on public pages.
 - Publish an entry in the CMS → webhook fires → next request is `MISS` with
   fresh content, then `HIT` again.
-- `?live_preview=x` request → never cached (`x-vercel-cache: MISS/BYPASS`
+- `?preview=x` request → never cached (`x-vercel-cache: MISS/BYPASS`
   every time).
 - Raise `CDN_CACHE_S_MAXAGE` to `86400` now that purge-driven freshness works.

@@ -4,34 +4,35 @@ import { HERO_BANNER_FRAGMENT } from "./fragments/hero-banner";
 /**
  * Main page query.
  *
- * THE N+1 RULE: one page = ONE query. `flexible_page` stores its FULL public
+ * THE N+1 RULE: one page = ONE query. `flexiblePage` stores its FULL public
  * path in `url`, so any request path maps directly to `where: { url }` — no
  * per-section follow-up fetches, no slug-resolution fetch in proxy.ts.
- * `sections` is uncapped (section count is open-ended); every LEAF multiple-
- * reference connection inside a fragment must carry a `limit:`.
+ * Every collection carries an explicit `limit:` — uncapped collections
+ * default to 100 items and multiply through Contentful's per-query
+ * complexity budget.
+ *
+ * `$preview` is the draft-content switch — the client injects its value
+ * automatically (see lib/cms/contentful/client.ts); thread it into every
+ * collection in every query.
  *
  * Add a section type: write its fragment, add an inline `... on X` spread
  * below, list the fragment in `buildQuery`, register the component in
  * components/sections/registry.tsx.
  */
 const OPERATION = gql`
-  query GetPageByUrl($url: String!) {
-    all_flexible_page(where: { url: $url }, limit: 1) {
+  query GetPageByUrl($url: String!, $preview: Boolean = false) {
+    flexiblePageCollection(where: { url: $url }, limit: 1, preview: $preview) {
       items {
-        system {
-          uid
-          content_type_uid
-          locale
+        sys {
+          id
         }
         title
         url
-        sectionsConnection {
-          edges {
-            node {
-              __typename
-              ... on HeroBanner {
-                ...HeroBannerFields
-              }
+        sectionsCollection(limit: 30) {
+          items {
+            __typename
+            ... on HeroBanner {
+              ...HeroBannerFields
             }
           }
         }

@@ -12,15 +12,16 @@ import { getCms } from "@/lib/cms";
  * logs, and no-ops. Point the CMS webhook here from day one; purging starts
  * working the moment a CDN playbook registers a purger.
  *
- * STATUS CODE POLICY (learned in production on Netapp): return 200 for every
- * authenticated, well-formed event — even when a downstream purge fails.
- * Contentstack treats 5xx as retryable and, after enough consecutive
- * failures, DISABLES THE WEBHOOK ENTIRELY — a far worse failure mode than one
- * missed purge (the stale-while-revalidate window is the backstop, and an
- * editor can re-publish). Failures surface via the structured error log
- * (alert on "[cms-purge-webhook] purge failure") and `ok: false` in the
- * response body, never via the HTTP status. The only 500 is a genuine server
- * misconfiguration (missing secret), which retrying can't cure.
+ * STATUS CODE POLICY (learned in production on Netapp, with Contentstack —
+ * kept as the safe default here): return 200 for every authenticated,
+ * well-formed event, even when a downstream purge fails. Some CMSs treat
+ * repeated 5xx as reason to DISABLE THE WEBHOOK ENTIRELY — a far worse
+ * failure mode than one missed purge (the stale-while-revalidate window is
+ * the backstop, and an editor can re-publish). Failures surface via the
+ * structured error log (alert on "[cms-purge-webhook] purge failure") and
+ * `ok: false` in the response body, never via the HTTP status. The only 500
+ * is a genuine server misconfiguration (missing secret), which retrying
+ * can't cure.
  *
  * Auth: shared secret in `x-webhook-secret`, compared in constant time.
  * Configure the same value in the CMS webhook settings.
@@ -57,7 +58,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     return NextResponse.json({ error: "invalid json body" }, { status: 400 });
   }
 
-  const targets = getCms().webhookToPurgeTargets(payload);
+  const targets = getCms().webhookToPurgeTargets(payload, req.headers);
   if (targets.tags.length === 0 && targets.urls.length === 0) {
     console.info("[cms-purge-webhook] non-purge event — skipped", { requestId });
     return NextResponse.json({ ok: true, skipped: true });
