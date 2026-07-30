@@ -26,6 +26,37 @@ After completing one of these integrations, **update the "Current stack state"
 section below** — it is how the next agent (or you, months later) knows what is
 already wired and how new layers must chain onto existing ones.
 
+<!-- agentguard:start -->
+## AgentGuard — mandatory workflow gates
+
+This repo enforces its engineering rules with deterministic local scripts —
+no model, no network. Full docs: `.agentguard/README.md`.
+
+**Before writing code:**
+
+1. Read `.agentguard/policies/core.md` plus the policies for what you touch
+   (`nextjs.md`, `contentful.md`).
+2. `npm run agent:scan` — refresh the project map.
+3. `npm run agent:discover -- "<task description>"` — get ranked related
+   files, then inspect those source files. Reuse/extend before creating.
+4. If the change will **create or delete source files**: write
+   `.agentguard/runs/current-plan.json`
+   (schema: `.agentguard/schemas/implementation-plan.schema.json`) and run
+   `npm run agent:plan:validate` before implementing.
+
+**Before finishing:**
+
+5. `npm run agent:diff:validate` — must exit 0. Errors are objective
+   violations (unplanned files, layer-boundary breaches, caching-invariant
+   breaches); fix them. Warnings are heuristics: resolve or explicitly
+   justify each in your summary.
+6. Run the verification bar below (`npm run lint`, `npm run build`, …).
+
+Never edit `.agentguard/generated/` or `.agentguard/cache/` (generated), and
+any change to `.agentguard/` policies/config or this file must be listed in
+your plan — policy edits are deliberate acts, not side effects.
+<!-- agentguard:end -->
+
 ## Current stack state
 
 > Maintained by agents. Update when you add/remove a CMS, CDN, or purge layer.

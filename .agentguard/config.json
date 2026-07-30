@@ -1,0 +1,115 @@
+{
+  "$schema": "./schemas/config.schema.json",
+  "version": 1,
+  "project": {
+    "framework": "nextjs",
+    "language": "typescript",
+    "sourceRoots": ["app", "components", "lib", "types", "proxy.ts"]
+  },
+  "scan": {
+    "includeExtensions": [".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs"],
+    "exclude": ["node_modules", ".next", ".git", ".agentguard", "coverage", "build", "out"],
+    "maxFileSizeBytes": 500000
+  },
+  "boundaries": {
+    "importRules": [
+      {
+        "id": "cms-adapter-internals",
+        "description": "CMS adapter internals (transport, config, preview, shape quirks) are private to lib/cms — everything else goes through the lib/cms public API or lib/content",
+        "targets": ["lib/cms/contentful/**"],
+        "allowedImporters": ["lib/cms/**"],
+        "severity": "error"
+      },
+      {
+        "id": "components-use-content-api",
+        "description": "components/ render normalized content via lib/content + types/contentful.ts; they must never reach into lib/cms",
+        "targets": ["lib/cms/**"],
+        "deniedImporters": ["components/**"],
+        "severity": "error"
+      },
+      {
+        "id": "cache-layer-cms-free",
+        "description": "lib/cache knows nothing about any CMS except the neutral PurgeTargets type in lib/cms/types",
+        "targets": ["lib/cms/**"],
+        "targetExceptions": ["lib/cms/types"],
+        "deniedImporters": ["lib/cache/**"],
+        "severity": "error"
+      }
+    ],
+    "invariants": [
+      {
+        "id": "no-use-cache-directive",
+        "description": "Full SSR, CDN-cached: a Next-side cache cannot be purged by CDN tag purges and silently serves stale content",
+        "paths": ["app/**", "components/**", "lib/**", "proxy.ts"],
+        "pattern": "^\\s*[\"']use cache[\"']",
+        "flags": "m",
+        "message": "\"use cache\" is forbidden — caching happens at the CDN, purged by tags. See AGENTS.md core invariants.",
+        "severity": "error"
+      },
+      {
+        "id": "no-unstable-cache",
+        "description": "Next data-layer caching bypasses CDN tag purges",
+        "paths": ["app/**", "components/**", "lib/**", "proxy.ts"],
+        "pattern": "\\bunstable_cache\\b",
+        "message": "unstable_cache is forbidden — it cannot be purged by CDN tag purges. See AGENTS.md core invariants.",
+        "severity": "error"
+      },
+      {
+        "id": "no-fetch-cache-options",
+        "description": "fetch() next.revalidate / next.tags create an unpurgeable Next-side cache",
+        "paths": ["app/**", "components/**", "lib/**", "proxy.ts"],
+        "pattern": "next\\s*:\\s*\\{[^}]*\\b(revalidate|tags)\\b",
+        "message": "fetch next:{revalidate|tags} is forbidden — CMS fetches use cache: \"no-store\"; the CDN owns caching. See AGENTS.md core invariants.",
+        "severity": "error"
+      },
+      {
+        "id": "no-route-segment-isr",
+        "description": "ISR route segment config conflicts with the CDN-owned caching model",
+        "paths": ["app/**"],
+        "pattern": "^export\\s+const\\s+revalidate\\b",
+        "flags": "m",
+        "message": "export const revalidate (ISR) is forbidden — responses are CDN-cached and tag-purged. See AGENTS.md core invariants.",
+        "severity": "error"
+      },
+      {
+        "id": "no-fetch-in-proxy",
+        "description": "proxy.ts stays fast: no data fetching in it, ever",
+        "paths": ["proxy.ts"],
+        "pattern": "\\bfetch\\s*\\(",
+        "message": "No data fetching in proxy.ts — the full-URL lookup strategy exists precisely to avoid this. See AGENTS.md core invariants.",
+        "severity": "error"
+      },
+      {
+        "id": "no-cms-sdk-imports",
+        "integration": "contentful",
+        "description": "No heavy CMS SDKs — the GraphQL client is a native-fetch POST with retry/backoff",
+        "paths": ["app/**", "components/**", "lib/**", "proxy.ts"],
+        "pattern": "from\\s+[\"'](contentful|contentful-management|@contentful/)",
+        "message": "Importing a Contentful SDK is forbidden — use the native-fetch client in lib/cms. See AGENTS.md core invariants.",
+        "severity": "error"
+      }
+    ]
+  },
+  "integrations": {
+    "contentful": {
+      "enabled": true,
+      "packageNames": ["contentful", "contentful-management"],
+      "adapterRoots": ["lib/cms/contentful"]
+    }
+  },
+  "validation": {
+    "newFileCountWarningThreshold": 3,
+    "similarityThreshold": 0.65
+  },
+  "context": {
+    "maximumCandidates": 20,
+    "maximumSymbolsPerFile": 50
+  },
+  "roles": {
+    "scanner": { "execution": "deterministic" },
+    "discovery": { "execution": "deterministic", "optionalAgentTier": "low-cost" },
+    "planner": { "execution": "agent", "recommendedTier": "primary" },
+    "implementer": { "execution": "agent", "recommendedTier": "primary" },
+    "reviewer": { "execution": "agent", "recommendedTier": "high-reasoning" }
+  }
+}

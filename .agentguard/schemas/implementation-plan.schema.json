@@ -1,0 +1,101 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AgentGuard implementation plan",
+  "description": "Written by the planner BEFORE implementation, validated by `npm run agent:plan:validate`, and matched against the real git diff by `npm run agent:diff:validate`. Required whenever a task creates or deletes source files.",
+  "type": "object",
+  "required": ["schemaVersion", "task", "summary", "validationCommands"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "task": { "type": "string", "minLength": 1, "description": "The requested change, in one or two sentences." },
+    "summary": { "type": "string", "minLength": 1, "description": "The smallest viable implementation approach." },
+    "existingCode": {
+      "type": "array",
+      "description": "What discovery found. Empty ONLY with noExistingCodeExplanation set.",
+      "items": {
+        "type": "object",
+        "required": ["path", "relevance", "decision"],
+        "properties": {
+          "path": { "type": "string" },
+          "symbols": { "type": "array", "items": { "type": "string" } },
+          "relevance": { "type": "string", "minLength": 1 },
+          "decision": { "enum": ["reuse", "extend", "consolidate", "replace", "unrelated"] }
+        }
+      }
+    },
+    "noExistingCodeExplanation": {
+      "type": "string",
+      "description": "Explicit statement that discovery (and a manual search) found no relevant existing implementation."
+    },
+    "filesToModify": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path"],
+        "properties": { "path": { "type": "string" }, "reason": { "type": "string" } }
+      }
+    },
+    "filesToCreate": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "reason"],
+        "properties": {
+          "path": { "type": "string" },
+          "reason": { "type": "string", "minLength": 1, "description": "Why no existing file is suitable." }
+        }
+      }
+    },
+    "filesToDelete": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path"],
+        "properties": { "path": { "type": "string" }, "reason": { "type": "string" } }
+      }
+    },
+    "newDependencies": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          { "type": "string" },
+          {
+            "type": "object",
+            "required": ["name"],
+            "properties": { "name": { "type": "string" }, "reason": { "type": "string" } }
+          }
+        ]
+      }
+    },
+    "newAbstractions": {
+      "type": "array",
+      "description": "Any new service/factory/registry/adapter/wrapper layer needs a present requirement.",
+      "items": {
+        "type": "object",
+        "required": ["name", "presentRequirement", "alternativesConsidered", "consumers"],
+        "properties": {
+          "name": { "type": "string" },
+          "presentRequirement": { "type": "string", "minLength": 1 },
+          "alternativesConsidered": {
+            "anyOf": [{ "type": "string", "minLength": 1 }, { "type": "array", "items": { "type": "string" } }]
+          },
+          "consumers": {
+            "anyOf": [{ "type": "string", "minLength": 1 }, { "type": "array", "items": { "type": "string" } }]
+          }
+        }
+      }
+    },
+    "reuseDecisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "responsibility": { "type": "string" },
+          "decision": { "type": "string" },
+          "path": { "type": "string" }
+        }
+      }
+    },
+    "duplicationRisks": { "type": "array", "items": { "type": "string" } },
+    "validationCommands": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+  }
+}

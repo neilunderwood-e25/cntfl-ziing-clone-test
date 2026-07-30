@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# agentguard (generated/local artifacts — policies & baseline stay committed)
+.agentguard/generated/
+.agentguard/cache/
+.agentguard/runs/

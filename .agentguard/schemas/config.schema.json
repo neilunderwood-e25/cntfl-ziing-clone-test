@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AgentGuard configuration",
+  "type": "object",
+  "required": ["version", "project"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "version": { "const": 1 },
+    "project": {
+      "type": "object",
+      "required": ["sourceRoots"],
+      "properties": {
+        "framework": { "type": "string" },
+        "language": { "type": "string" },
+        "sourceRoots": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1,
+          "description": "Directories (or single files) containing application source, relative to the repo root."
+        }
+      }
+    },
+    "scan": {
+      "type": "object",
+      "properties": {
+        "includeExtensions": { "type": "array", "items": { "type": "string" } },
+        "exclude": { "type": "array", "items": { "type": "string" } },
+        "maxFileSizeBytes": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "boundaries": {
+      "type": "object",
+      "properties": {
+        "importRules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "targets"],
+            "properties": {
+              "id": { "type": "string" },
+              "description": { "type": "string" },
+              "integration": { "type": "string", "description": "Rule is skipped when this integration is disabled." },
+              "targets": { "type": "array", "items": { "type": "string" }, "description": "Globs over resolved, extensionless module paths being imported." },
+              "targetExceptions": { "type": "array", "items": { "type": "string" } },
+              "allowedImporters": { "type": "array", "items": { "type": "string" }, "description": "If set, ONLY files matching these globs may import the targets." },
+              "deniedImporters": { "type": "array", "items": { "type": "string" }, "description": "Files matching these globs may NOT import the targets." },
+              "severity": { "enum": ["error", "warning"] }
+            }
+          }
+        },
+        "invariants": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "pattern", "paths"],
+            "properties": {
+              "id": { "type": "string" },
+              "description": { "type": "string" },
+              "integration": { "type": "string" },
+              "paths": { "type": "array", "items": { "type": "string" } },
+              "excludePaths": { "type": "array", "items": { "type": "string" } },
+              "pattern": { "type": "string", "description": "JavaScript RegExp source matched against comment-stripped file content." },
+              "flags": { "type": "string" },
+              "message": { "type": "string" },
+              "severity": { "enum": ["error", "warning"] }
+            }
+          }
+        }
+      }
+    },
+    "integrations": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "enabled": { "type": "boolean" },
+          "packageNames": { "type": "array", "items": { "type": "string" } },
+          "adapterRoots": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "validation": {
+      "type": "object",
+      "properties": {
+        "newFileCountWarningThreshold": { "type": "integer", "minimum": 0 },
+        "similarityThreshold": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "maximumCandidates": { "type": "integer", "minimum": 1 },
+        "maximumSymbolsPerFile": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "roles": { "type": "object" }
+  }
+}
