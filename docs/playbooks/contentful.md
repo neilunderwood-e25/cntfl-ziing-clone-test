@@ -29,7 +29,7 @@ The routing/caching design assumes the housing page type (`flexiblePage`)
 stores its **FULL public path** in a `url` field (unique). That is what lets
 the catch-all route resolve any URL with one `where: { url }` query and keeps
 `proxy.ts` free of CMS fetches. Preserve this in new content models — the
-pattern is inherited from the proven Contentstack/Netapp architecture. If a
+pattern is inherited from a proven production architecture. If a
 slug-only content type (blog, events…) is added later, put its prefix in a
 route-prefix map; never resolve slugs with a fetch in proxy.
 

@@ -12,8 +12,8 @@
  *
  * Model (mirrors the field shapes the sample code queries — keep
  * lib/content/queries/fragments/hero-banner.ts in sync if you change it;
- * structure follows the proven Contentstack flexible_page pattern: the page
- * stores its FULL public path in `url` and composes section references):
+ * structure follows a proven production pattern: the page stores its FULL
+ * public path in `url` and composes section references):
  *   flexiblePage: title, url (unique), sections → [heroBanner]
  *   heroBanner:   title, heading, subHeading, image (asset), ctaLabel, ctaUrl
  */

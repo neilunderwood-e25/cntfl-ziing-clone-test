@@ -19,13 +19,14 @@ is `Edge-Control`. In `lib/cache/headers.ts`:
   - no-store profile → `no-store`
 - The `!no-store` metadata directive forces caching even when an Akamai
   property rule marked the response uncacheable (e.g. a Cache-ID rule
-  appending `cid=[not cachable]`) — this was required in production on
-  Netapp. Do NOT include `public` or `stale-while-revalidate` inside
-  `Edge-Control`; SWR behavior is configured property-side.
+  appending `cid=[not cachable]`) — this was required in a previous
+  production deployment. Do NOT include `public` or `stale-while-revalidate`
+  inside `Edge-Control`; SWR behavior is configured property-side.
 - Keep `CDN-Cache-Control` emission unchanged — the inner CDN still reads it.
-
-Reference implementation (Netapp, battle-tested): `buildEdgeControlHeader()`
-in `cstack-netapp-dotcom/src/lib/cache/responseHeaders.ts`.
+- Suggested shape: a `buildEdgeControlHeader(cdnCacheControl)` helper that
+  parses the CDN profile string, returns `no-store` when it contains
+  `no-store`, and otherwise `!no-store, max-age=<s-maxage, falling back to
+  max-age>`.
 
 ## 2. Property (Akamai config) requirements
 
@@ -52,13 +53,12 @@ Akamai tag rules: https://techdocs.akamai.com/purge-cache/docs/assign-cache-tags
 
 Create `lib/cache/purgers/akamai.ts` implementing `CdnPurger`:
 
-- API: Fast Purge v3 by cache tag, authenticated with **EdgeGrid** (HMAC
-  signature). Env vars: `AKAMAI_FAST_PURGE_HOST`, `AKAMAI_FAST_PURGE_CLIENT_TOKEN`,
+- API: Fast Purge v3 by cache tag, authenticated with **EdgeGrid** (Akamai's
+  HMAC-SHA256 signature over a canonicalized request — implementable
+  dependency-free with `node:crypto`; follow Akamai's EdgeGrid docs). Env
+  vars: `AKAMAI_FAST_PURGE_HOST`, `AKAMAI_FAST_PURGE_CLIENT_TOKEN`,
   `AKAMAI_FAST_PURGE_CLIENT_SECRET`, `AKAMAI_FAST_PURGE_ACCESS_TOKEN`,
   optional `AKAMAI_FAST_PURGE_NETWORK` (production|staging).
-  A dependency-free EdgeGrid signer + retry loop exists in
-  `cstack-netapp-dotcom/src/lib/akamai/fastPurge.ts` — port it rather than
-  rewriting.
 - Hard delete for `CACHE_PURGE_MODE=delete` (default), soft invalidate for
   `invalidate` — mirror the mode the inner purger uses.
 - Retry transient 429 ("TAG Rate Limit exceeded") and 5xx with bounded

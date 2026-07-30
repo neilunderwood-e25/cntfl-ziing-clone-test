@@ -11,7 +11,7 @@ In `lib/cache/headers.ts`:
 - Extend `CacheProfile` with a `vercel` value and emit it as
   `Vercel-CDN-Cache-Control` in `applyCacheHeaders`/`buildCacheHeaders`.
   Start with the same value as `cdn`.
-- **Known behavior** (production-verified on Netapp): Next.js owns
+- **Known behavior** (verified in production): Next.js owns
   `Vercel-CDN-Cache-Control` on dynamically rendered pages and may clobber
   what proxy sets. Vercel's CDN then falls back to `CDN-Cache-Control` — which
   we always send — so pages still cache correctly. Emit the Vercel header

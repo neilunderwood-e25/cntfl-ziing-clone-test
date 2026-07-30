@@ -12,16 +12,15 @@ import { getCms } from "@/lib/cms";
  * logs, and no-ops. Point the CMS webhook here from day one; purging starts
  * working the moment a CDN playbook registers a purger.
  *
- * STATUS CODE POLICY (learned in production on Netapp, with Contentstack —
- * kept as the safe default here): return 200 for every authenticated,
- * well-formed event, even when a downstream purge fails. Some CMSs treat
- * repeated 5xx as reason to DISABLE THE WEBHOOK ENTIRELY — a far worse
- * failure mode than one missed purge (the stale-while-revalidate window is
- * the backstop, and an editor can re-publish). Failures surface via the
- * structured error log (alert on "[cms-purge-webhook] purge failure") and
- * `ok: false` in the response body, never via the HTTP status. The only 500
- * is a genuine server misconfiguration (missing secret), which retrying
- * can't cure.
+ * STATUS CODE POLICY (a production lesson, kept as the safe default here):
+ * return 200 for every authenticated, well-formed event, even when a
+ * downstream purge fails. Some CMSs treat repeated 5xx as reason to DISABLE
+ * THE WEBHOOK ENTIRELY — a far worse failure mode than one missed purge (the
+ * stale-while-revalidate window is the backstop, and an editor can
+ * re-publish). Failures surface via the structured error log (alert on
+ * "[cms-purge-webhook] purge failure") and `ok: false` in the response body,
+ * never via the HTTP status. The only 500 is a genuine server
+ * misconfiguration (missing secret), which retrying can't cure.
  *
  * Auth: shared secret in `x-webhook-secret`, compared in constant time.
  * Configure the same value in the CMS webhook settings.

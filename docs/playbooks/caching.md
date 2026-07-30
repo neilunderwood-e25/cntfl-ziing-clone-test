@@ -24,7 +24,7 @@ header before passing the response downstream.
 | Vercel only      | `Vercel-CDN-Cache-Control`| add-vercel playbook                      |
 | Akamai only      | `Edge-Control`            | add-akamai playbook                      |
 
-**Production-verified Next.js behavior** (Netapp): on dynamically rendered
+**Production-verified Next.js behavior**: on dynamically rendered
 pages Next stamps browser `Cache-Control` itself and owns
 `Vercel-CDN-Cache-Control`, but passes `CDN-Cache-Control` through untouched.
 That is why `CDN-Cache-Control` is what keeps dynamic pages cacheable at CDNs.
@@ -42,7 +42,7 @@ requests get `NO_STORE_PROFILE` (`private, no-store`) at every layer.
   `stale-while-revalidate` (24 h). Long SWR is the origin shield: at expiry,
   stale serves coalesce concurrent traffic into one background revalidate, so
   neither the SSR origin nor the CMS API gets stampeded (CMS rate-limit 429s
-  were a real production incident class on Netapp).
+  are a real production incident class on high-traffic CMS sites).
 - **Purge wired (after a CDN playbook)**: raise `s-maxage` to 86400. Freshness
   is then event-driven; the long fresh window minimizes CMS egress.
 
@@ -59,8 +59,8 @@ Tags connect **emission** (responses declare what they depend on) to
   name** (`Vercel-Cache-Tag`, `Edge-Cache-Tag`, `Cache-Tag`).
 - Today only the route tag is emitted. Entry-dependency tags (`cms-entry-*` on
   every page that embeds an entry) enable surgical purges but require knowing
-  the page's entry graph at response time — on Netapp this was a best-effort
-  dependency fetch. Add that only when a project actually needs
+  the page's entry graph at response time (typically a best-effort dependency
+  fetch with a short timeout). Add that only when a project actually needs
   entry-level purging; route + content-type tags cover most sites.
 
 ## The purge chain (`lib/cache/purge.ts`)
@@ -77,9 +77,9 @@ closes the window. So with Vercel behind Akamai: `PURGERS = [vercel, akamai]`.
 Webhook policies (production lessons, keep them):
 
 - **Always 200 for authenticated well-formed events, even on purge failure.**
-  Some CMSs disable a webhook after repeated 5xx retries (this bit the Netapp
-  project in production with Contentstack) — losing ALL future purges to save
-  one. The SWR window backstops a missed purge. Alert on the
+  Some CMSs disable a webhook after repeated 5xx retries (a failure mode
+  observed in production) — losing ALL future purges to save one. The SWR
+  window backstops a missed purge. Alert on the
   `[cms-purge-webhook] purge failure` error log.
 - Purgers must resolve `{ ok: true, skipped: true }` when their credentials
   are missing (never throw), and retry transient 429/5xx with bounded backoff

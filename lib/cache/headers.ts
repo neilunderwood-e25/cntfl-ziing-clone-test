@@ -15,7 +15,7 @@
  *   +Vercel   ← Vercel-CDN-Cache-Control (add via docs/playbooks/add-vercel.md)
  *   +Akamai   ← Edge-Control             (add via docs/playbooks/add-akamai.md)
  *
- * CRITICAL Next.js fact (verified in production on the Netapp project): on
+ * CRITICAL Next.js fact (verified in production): on
  * dynamically rendered pages Next stamps the browser-facing Cache-Control to
  * `private, no-cache, no-store, …` — anything we set there is clobbered, and
  * that's fine (browsers should always revalidate HTML). Next also owns

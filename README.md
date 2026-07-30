@@ -1,10 +1,10 @@
 # next-cms-boilerplate
 
-Starting point for Contentful-driven, full-SSR Next.js sites. Encodes the
-performance/caching patterns proven in production (Netapp, sophos-home):
-one-query-per-page fetching with batched enrichment, CDN-first caching with
-purge-ready headers, and a thin CMS client boundary that keeps transport,
-auth, preview and retry concerns out of app code.
+Starting point for Contentful-driven, full-SSR Next.js sites. Encodes
+performance/caching patterns proven in production on prior large-scale CMS
+builds: one-query-per-page fetching with batched enrichment, CDN-first
+caching with purge-ready headers, and a thin CMS client boundary that keeps
+transport, auth, preview and retry concerns out of app code.
 
 **Working on this repo with an AI agent? [`AGENTS.md`](./AGENTS.md) is the
 operating manual** — architecture, invariants, and per-task playbooks

@@ -7,8 +7,8 @@ This version has breaking changes — APIs, conventions, and file structure may 
 # Agent operating manual
 
 This repo is a **boilerplate**: the starting point for CMS-driven, full-SSR
-Next.js sites. It encodes hard-won production patterns (chiefly from the
-Netapp project) so every new project starts on the right course. Your job when
+Next.js sites. It encodes hard-won patterns from prior large-scale production
+CMS builds so every new project starts on the right course. Your job when
 working here is to **extend it along its designed seams** — the playbooks below
 tell you exactly which seam each kind of task uses.
 
@@ -88,9 +88,9 @@ layer. The rules that keep the boundaries clean:
   strategy exists precisely to avoid slug-resolution fetches there).
 - **Preview responses are `private, no-store`** at every cache layer.
 - **Purge webhook returns 200 even when a purge fails** (some CMSs disable a
-  webhook after repeated 5xx — a production incident on the Netapp project —
-  and one missed purge is the lesser evil). Alert on the `purge failure`
-  error log instead.
+  webhook after repeated 5xx — this caused a real production incident — and
+  one missed purge is the lesser evil). Alert on the `purge failure` error
+  log instead.
 - **Cache tags**: lowercase `[a-z0-9_-]`, no colons (Akamai's charset is the
   lowest common denominator). Always create tags via `lib/cache/tags.ts`.
 - **No heavy CMS SDKs / Apollo.** The GraphQL client is a native-fetch POST
