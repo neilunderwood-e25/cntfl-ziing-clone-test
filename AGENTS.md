@@ -65,6 +65,17 @@ your plan — policy edits are deliberate acts, not side effects.
   pointed at a real space — the sample content model (`flexiblePage` +
   `heroBanner`) must exist in / be aligned to the project's space
   (`scripts/create-content-model.mjs` seeds it on an empty space).
+- **Section pattern**: `HeroBanner` → `Hero` family → exact `frontendComponent`
+  dispatch to `heroWithBanner` / `heroWithCTA`. Constants live in
+  `lib/content/enum.ts`, derived unions in `lib/content/types.ts`, normalized
+  family data in `types/contentful.ts`. The sample seeder creates `/` and
+  `/sample-cta`; older spaces require a manual discriminator migration.
+- **Common components**: developer-owned seam documented in
+  `components/common/README.md`; no project-specific common models/components
+  or foundation tokens are assumed. Foundry generates style guide/container
+  per project before common components and sections are built.
+- **Images**: sample Hero uses Next Image with HTTPS `images.ctfassets.net`
+  assets allowed in `next.config.ts`.
 - **CDN layers (outermost first)**: none. Responses already carry
   `CDN-Cache-Control` so any CDN placed in front starts caching correctly.
 - **Cache purge**: no-op. Webhook route exists and authenticates
@@ -131,13 +142,27 @@ layer. The rules that keep the boundaries clean:
 
 Marked `SAMPLE` in-file: `lib/content/queries/fragments/hero-banner.ts`,
 the `HeroBanner` spread in `lib/content/queries/page.ts`,
-`components/sections/hero-banner.tsx`, its entry in
-`components/sections/registry.tsx`. The pattern (fragment → inline spread →
-component → registry entry) is the contract; the fields are placeholders.
+the variants under `components/sections/hero/`, and their normalized
+`HeroSection` type. The fields and styles are placeholders; the two-level
+dispatch is the reusable contract.
+
+Each family gets ONE registry entry by GraphQL `__typename`. Its `index.tsx`
+switches on the exact `frontendComponent` value from Contentful and renders
+a sibling variant directory, with `default: return null`. Keep CMS spelling
+verbatim; do not add guessed aliases or change the CMS to fit code names.
+Variants receive the normalized family data and never fetch CMS data directly.
+
+Adding a variant extends the family's constants, type/fragment if needed,
+and dispatcher. Adding a family also adds a page-query spread and registry
+entry. Always compose complete fragment dependency lists (`HERO_FRAGMENTS`
+in the sample); common components are imported directly by variants and
+never registered as sections. Follow `docs/playbooks/contentful.md` §3.
 
 ## Verification bar
 
 - `npm run build` and `npm run lint` must pass.
+- For section/data-wiring changes, `npm test` must pass. It uses a local
+  GraphQL schema and rendered fixtures, not a live Contentful space.
 - If you touched caching: `npm run build && npm run start`, then curl a page
   and assert the `CDN-Cache-Control` header (and `private, no-store` with
   `?preview=x`).

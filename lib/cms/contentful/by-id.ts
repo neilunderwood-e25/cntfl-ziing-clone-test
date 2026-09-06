@@ -23,7 +23,7 @@ export const MAX_ID_IN_FILTER = 50;
  *
  * Register concrete fetchers in project code, e.g.:
  *   export const getHeroBannersByIds =
- *     makeByIdFetcher("heroBanner", "HeroBannerFields", [HERO_BANNER_FRAGMENT]);
+ *     makeByIdFetcher("heroBanner", "HeroFields", HERO_FRAGMENTS);
  */
 export function makeByIdFetcher(
   contentTypeId: string,

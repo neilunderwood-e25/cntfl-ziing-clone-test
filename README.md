@@ -21,7 +21,9 @@ npm run dev
 Without credentials the site boots to a setup notice. To wire a real
 Contentful space, follow [docs/playbooks/contentful.md](./docs/playbooks/contentful.md) —
 on an empty space, `node scripts/create-content-model.mjs --with-entries`
-creates the sample model and a published home page.
+creates the sample model and published pages at `/` and `/sample-cta`, showing
+two Hero variants selected by `frontendComponent` on the same content type.
+Existing sample spaces need the discriminator migration documented in the playbook.
 
 ## What's inside
 
@@ -30,7 +32,9 @@ creates the sample model and a published home page.
 | `lib/cms/` | CMS client boundary + Contentful adapter (transport, retry, preview, normalize, enrichment) |
 | `lib/content/` | The app's content API: queries + the one-per-request page fetch |
 | `lib/cache/` | CDN cache headers, tag vocabulary, purge chain (no-op until a CDN is added) |
-| `components/sections/` | Section registry + sample section (the per-project pattern to copy) |
+| `components/sections/` | Typename registry → family dispatcher → frontendComponent variant |
+| `components/common/` | Contract for developer-built shared content components |
+| `lib/content/enum.ts`, `types.ts` | Exact CMS discriminator constants and derived unions |
 | `app/[[...slug]]/` | Catch-all SSR route — one CMS query per page |
 | `app/api/webhooks/cms/purge/` | CMS publish webhook → CDN purge pipeline |
 | `proxy.ts` | Stamps CDN cache directives on every page response |
@@ -52,3 +56,23 @@ creates the sample model and a published home page.
 - **Purge-ready from day 0.** Responses carry purgeable-tag plumbing and the
   webhook route runs end-to-end as a structured no-op; adding Vercel/Akamai
   is a playbook, not a redesign.
+
+## Building sections with Foundry
+
+The boilerplate owns the family/variant pattern, following the corporate
+implementation. Foundry automates code generation within that pattern:
+
+1. Fork and connect this project to the backend team's Contentful environment.
+2. Generate the project style guide and container with Foundry.
+3. Build common components manually using the project tokens.
+4. Discover the backend's model/variant mappings through CMA + Delivery.
+5. Implement variants from designs and independently verify their data binding
+   and rendered output.
+
+Follow [the Contentful playbook](docs/playbooks/contentful.md#3-section-families-and-frontend-variants)
+for the exact extension points. The sample's styles and fields are placeholders;
+the dispatcher, type, query, and registry conventions are reusable.
+
+Run `npm test`, `npm run lint`, and `npm run build` to verify the pattern locally.
+The test suite uses fixtures and makes no Contentful writes. A connected project
+must also pass the live page/preview checks in the playbook.

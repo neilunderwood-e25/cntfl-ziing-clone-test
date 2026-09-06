@@ -1,24 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { CfAsset, Section, Sys } from "@/types/contentful";
+import type { HeroSection } from "@/types/contentful";
 
 /**
- * SAMPLE — the reference implementation of a section component. Every real
- * section follows this pattern: narrow the generic `Section` to the section's
- * own field shape, render, and register in ./registry.tsx.
+ * SAMPLE — image-led Hero variant. Replace these sample styles with the
+ * project's style-guide tokens, Container, and hand-built common components.
  */
-type HeroBannerData = {
-  __typename: "HeroBanner";
-  sys?: Sys;
-  heading?: string | null;
-  subHeading?: string | null;
-  image?: CfAsset | null;
-  ctaLabel?: string | null;
-  ctaUrl?: string | null;
-};
-
-export function HeroBanner({ section }: { section: Section }) {
-  const data = section as HeroBannerData;
+export function HeroWithBanner({ section: data }: { section: HeroSection }) {
   const image = data.image;
 
   return (
@@ -26,10 +14,12 @@ export function HeroBanner({ section }: { section: Section }) {
       {image?.url ? (
         <Image
           src={image.url}
-          alt={image.title ?? ""}
+          alt={image.description ?? ""}
           width={image.width ?? 1920}
           height={image.height ?? 720}
-          priority
+          loading="eager"
+          fetchPriority="high"
+          sizes="100vw"
           className="h-[60vh] w-full object-cover"
         />
       ) : null}

@@ -1,7 +1,7 @@
 /**
  * One-time seeder: creates the boilerplate's sample content model in a
  * Contentful space via the Content Management API, and (with --with-entries)
- * a published home page so the app renders end-to-end immediately.
+ * published sample pages for both Hero variants.
  *
  *   node scripts/create-content-model.mjs                # content types only
  *   node scripts/create-content-model.mjs --with-entries # + home page + publish
@@ -15,7 +15,7 @@
  * structure follows a proven production pattern: the page stores its FULL
  * public path in `url` and composes section references):
  *   flexiblePage: title, url (unique), sections → [heroBanner]
- *   heroBanner:   title, heading, subHeading, image (asset), ctaLabel, ctaUrl
+ *   heroBanner:   title, frontendComponent, heading, subHeading, image (asset), ctaLabel, ctaUrl
  */
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
@@ -68,10 +68,17 @@ const CONTENT_TYPES = [
     id: "heroBanner",
     body: {
       name: "Hero Banner",
-      description: "SAMPLE section — replace per project",
+      description: "[role:section] SAMPLE Hero family — replace per project",
       displayField: "title",
       fields: [
         { id: "title", name: "Title", type: "Symbol", required: true },
+        {
+          id: "frontendComponent",
+          name: "Frontend Component",
+          type: "Symbol",
+          required: true,
+          validations: [{ in: ["heroWithBanner", "heroWithCTA"] }],
+        },
         { id: "heading", name: "Heading", type: "Symbol" },
         { id: "subHeading", name: "Sub Heading", type: "Symbol" },
         { id: "image", name: "Image", type: "Link", linkType: "Asset" },
@@ -114,8 +121,27 @@ async function createContentTypes() {
   for (const { id, body } of CONTENT_TYPES) {
     const existing = await api("GET", `/content_types/${id}`);
     if (existing.status === 200) {
+      if (id === "heroBanner") {
+        const field = existing.json.fields?.find((field) => field.id === "frontendComponent");
+        const allowed = field?.validations?.find((validation) => validation.in)?.in;
+        if (
+          field?.type !== "Symbol" || field.disabled || field.omitted ||
+          (allowed && !["heroWithBanner", "heroWithCTA"].every((value) => allowed.includes(value)))
+        ) {
+          console.error(
+            "✗ Existing heroBanner needs a frontendComponent Symbol field allowing heroWithBanner and heroWithCTA. " +
+            "Update/publish the model and populate existing entries manually; see docs/playbooks/contentful.md §3. " +
+            "No existing model was changed.",
+          );
+          process.exit(1);
+        }
+      }
       console.log(`• content type already exists, skipped: ${id}`);
       continue;
+    }
+    if (existing.status !== 404) {
+      console.error(`✗ cannot inspect ${id} (HTTP ${existing.status}); stopping before any create attempt`);
+      process.exit(1);
     }
 
     const created = await api("PUT", `/content_types/${id}`, body);
@@ -196,6 +222,7 @@ if (WITH_ENTRIES) {
     "title",
     {
       title: "Sample Hero Banner",
+      frontendComponent: "heroWithBanner",
       heading: "Welcome to the boilerplate",
       subHeading: "Full-SSR, CDN-cached, one query per page.",
       ctaLabel: "Read the docs",
@@ -217,7 +244,34 @@ if (WITH_ENTRIES) {
   );
   await publishEntry(page);
 
-  console.log("\nDone. Start the app (npm run dev) and open http://localhost:3000/");
+  const ctaHero = await createEntry(
+    "heroBanner",
+    "title",
+    {
+      title: "Sample Hero With CTA",
+      frontendComponent: "heroWithCTA",
+      heading: "One content model, another layout",
+      subHeading: "The Hero family selects this variant using frontendComponent.",
+      ctaLabel: "Back to the banner",
+      ctaUrl: "/",
+    },
+    locale,
+  );
+  await publishEntry(ctaHero);
+
+  const ctaPage = await createEntry(
+    "flexiblePage",
+    "url",
+    {
+      title: "CTA Hero sample",
+      url: "/sample-cta",
+      sections: [{ sys: { type: "Link", linkType: "Entry", id: ctaHero.sys.id } }],
+    },
+    locale,
+  );
+  await publishEntry(ctaPage);
+
+  console.log("\nDone. Start the app (npm run dev) and open / and /sample-cta.");
 } else {
-  console.log("\nContent types done. Re-run with --with-entries to seed + publish a home page.");
+  console.log("\nContent types done. Re-run with --with-entries to seed + publish both sample pages.");
 }

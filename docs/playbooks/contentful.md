@@ -20,8 +20,12 @@ Update "Current stack state" in `AGENTS.md` when the project is wired.
 
 `node scripts/create-content-model.mjs --with-entries` (needs
 `CONTENTFUL_MANAGEMENT_TOKEN` in `.env.local`) creates the sample model
-(`flexiblePage` + `heroBanner`), seeds a published home page, and the app
-renders end-to-end. Safe to re-run; skips anything that already exists.
+(`flexiblePage` + `heroBanner`) and seeds two published pages: `/` selects
+`heroWithBanner`; `/sample-cta` selects `heroWithCTA`. Both use the same Hero
+content type. Existing models and entries are not migrated automatically.
+An older `heroBanner` without a usable `frontendComponent` field stops the
+script with migration instructions. Foundry itself does not run this seeder;
+the backend team owns models, entries, and publishing.
 
 ## 2. Content model contract
 
@@ -33,17 +37,87 @@ pattern is inherited from a proven production architecture. If a
 slug-only content type (blog, events…) is added later, put its prefix in a
 route-prefix map; never resolve slugs with a fetch in proxy.
 
-## 3. Replace the SAMPLE section code
+## 3. Section families and frontend variants
 
-Per new section content type:
+The boilerplate includes the reusable pattern from
+[`cntfl-eight25corporate`](https://github.com/825media/cntfl-eight25corporate/tree/4d9f3301f4eaf60e1b4999714df847fb6b64ff83/components/sections/hero):
 
-1. Fragment in `lib/content/queries/fragments/<name>.ts`.
-2. Inline `... on <Type>` spread + fragment registration in
-   `lib/content/queries/page.ts`.
-3. Component in `components/sections/<name>.tsx` typed against
-   `types/contentful.ts`.
-4. Registry entry in `components/sections/registry.tsx`
-   (GraphQL `__typename` = PascalCase of the content-type id).
+`Contentful type → __typename registry → family → frontendComponent → variant`
+
+The sample `heroBanner` type has GraphQL typename `HeroBanner`, registered as
+the `Hero` family. Its `frontendComponent` Symbol field allows exactly
+`heroWithBanner` and `heroWithCTA`. These are example values, not naming rules
+for other projects. The backend team maintains each real model and its values;
+Foundry discovers them using CMA + Delivery. Preserve the actual values,
+including spaces and capitalization, without inventing aliases or updating
+the CMS to match a folder name.
+
+```text
+lib/content/enum.ts                         # exact typenames + variant values
+lib/content/types.ts                        # unions derived from the constants
+types/contentful.ts                         # normalized family data
+lib/content/queries/fragments/hero-banner.ts # HeroFields + dependency list
+lib/content/queries/page.ts                 # one page operation
+components/sections/registry.tsx             # HeroBanner → Hero
+components/sections/hero/index.tsx           # variant dispatcher
+components/sections/hero/heroWithBanner/index.tsx
+components/sections/hero/heroWithCTA/index.tsx
+```
+
+### Add a variant to an existing family
+
+1. Confirm the exact `frontendComponent` value and required fields in the CMS.
+2. Add the value to the family's constant in `lib/content/enum.ts`. The union
+   in `lib/content/types.ts` derives from it.
+3. Extend the family's queried/normalized type as needed. Query the union of
+   fields used by all built variants; never remove a sibling's required fields.
+4. Add a sibling variant folder and its `case` in the family dispatcher.
+   Variants receive the normalized family type and reuse common components.
+5. Keep the existing root registry entry and page spread. A visual variant
+   does not need its own CMS type, registry entry, or data fetch.
+
+### Add a new family
+
+1. Add its exact typename and variant constants, plus derived union types.
+2. Define the normalized family data in `types/contentful.ts` (or a family-local
+   type module as the project grows).
+3. Add its family fragment, including `sys { id }` and `frontendComponent`.
+   Export `<FAMILY>_FRAGMENTS` with the fragment and every dependency.
+4. Add `... on <ActualType> { ...<Family>Fields }` to `sectionsCollection.items`
+   and include its complete fragment list in `buildQuery` in `page.ts`.
+5. Create the family dispatcher and initial variant, then register the family
+   once using `[SectionTypename.<Family>]` in `registry.tsx`.
+
+The CMS page's sections validation must already allow the new model. A new
+constant alone does not establish a backend mapping. Unknown typenames retain
+the development marker and render nothing in production. Missing, unknown,
+or differently capitalized variant values return `null` from the family;
+verification must report them as unbuilt/unmapped, never silently use the
+first variant. Every built variant provides a stable `data-section` marker
+for section-level QA.
+
+### Common components and foundation
+
+Follow [components/common/README.md](../../components/common/README.md) for
+developer-owned `[role:common]` components, normalized types, and reusable
+fragment lists. Common components are imported by variants and stay out of
+the section registry. Keep `flattenCollections` as the single normalization
+boundary; do not add a parallel CMS-to-DTO layer.
+
+The sample layouts have intentionally simple Tailwind styles. On a real
+project, Foundry generates the style guide and container, developers build
+common components against those tokens, and section variants consume them.
+The boilerplate supplies the pattern; it does not impose corporate tokens,
+fonts, or shared component field names on every new project.
+
+### Migrate an older sample space
+
+Before running the new page query, have the backend team add and publish the
+`heroBanner.frontendComponent` Symbol field with the two sample values above.
+Set existing banner entries to `heroWithBanner` and republish them. Add
+`heroWithCTA` entries only where that layout is wanted. The updated query
+cannot run against a schema that still lacks the discriminator field.
+The optional seeder never performs this migration or rewrites existing entries.
 
 ## 4. GraphQL shape (Content API)
 
@@ -129,6 +203,9 @@ day one so the pipeline is observable in logs.
 
 ## 9. Verify (runtime, against the real space)
 
+- `npm test` exercises the real page query against a local sample GraphQL
+  schema, collection normalization, both variants, and unknown-value behavior.
+  These fixtures do not constitute a live Contentful check.
 - `/` and one nested path → 200 with sections rendered; unknown path → 404.
 - `?preview=<secret>` on a page → draft content + `private, no-store` headers.
 - Watch the dev console for GraphQL errors; complexity errors mean a

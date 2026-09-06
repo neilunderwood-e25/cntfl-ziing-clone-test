@@ -7,6 +7,8 @@
  * Extend per project as the content model grows (one type per section,
  * defined next to its component or here for shared shapes).
  */
+import type { SectionTypename } from "@/lib/content/enum";
+import type { HeroFrontendComponent } from "@/lib/content/types";
 
 export type Sys = {
   id: string;
@@ -24,13 +26,27 @@ export type CfAsset = {
 
 /**
  * One page section. `__typename` is the discriminator the section registry
- * dispatches on; each section component narrows the remaining fields to its
- * own shape (see components/sections/hero-banner.tsx).
+ * dispatches on. A family narrows the data once and selects a variant using
+ * frontendComponent. Unknown CMS types/values remain representable so the
+ * rendering boundary can safely ignore layouts that have not been built.
  */
 export type Section = {
   __typename: string;
+  frontendComponent?: string | null;
   sys?: Sys;
 } & Record<string, unknown>;
+
+/** SAMPLE — normalized data shared by the Hero family's visual variants. */
+export type HeroSection = {
+  __typename: typeof SectionTypename.Hero;
+  frontendComponent?: HeroFrontendComponent | null;
+  sys?: Sys;
+  heading?: string | null;
+  subHeading?: string | null;
+  image?: CfAsset | null;
+  ctaLabel?: string | null;
+  ctaUrl?: string | null;
+};
 
 export type Page = {
   sys: Sys;
