@@ -8,5 +8,17 @@
     "environment": "master",
     "graphqlHost": "graphql.contentful.com"
   },
-  "createdAt": "2026-10-11T18:13:04.471Z"
+  "createdAt": "2026-10-11T18:13:04.471Z",
+  "jira": {
+    "site": {
+      "id": "03b1794b-d414-4c86-80d5-a8ff6b897c65",
+      "name": "eight25media",
+      "url": "https://eight25media.atlassian.net"
+    },
+    "project": {
+      "id": "17041",
+      "key": "ZING",
+      "name": "Ziing"
+    }
+  }
 }

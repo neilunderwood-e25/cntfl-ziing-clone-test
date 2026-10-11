@@ -2,6 +2,7 @@ import type { ComponentType } from "react";
 import type { Section } from "@/types/contentful";
 import { SectionTypename } from "@/lib/content/enum";
 import type { SectionTypename as SectionTypenameValue } from "@/lib/content/types";
+import { Ctas } from "./ctas";
 import { Hero } from "./hero";
 
 /**
@@ -17,6 +18,7 @@ import { Hero } from "./hero";
  */
 const SECTION_COMPONENTS: Record<SectionTypenameValue, ComponentType<{ section: Section }>> = {
   [SectionTypename.Hero]: Hero,
+  [SectionTypename.Ctas]: Ctas,
 };
 
 export function SectionRenderer({ sections }: { sections: Section[] }) {

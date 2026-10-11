@@ -28,7 +28,7 @@ function PlayIcon({ icon }: Readonly<{ icon?: ImageData | null }>) {
   return icon ? (
     <Image section={icon} alt={imageAlt(icon)} hideCaption className="h-auto w-auto" />
   ) : (
-    <span className="icon icon-video-play" aria-hidden="true" />
+    <span className="icon icon-play" aria-hidden="true" />
   );
 }
 

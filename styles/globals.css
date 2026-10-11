@@ -67,8 +67,8 @@
   /* Border radius */
   --radius-none: 0px;
   --radius-xs: 5px;
-  --radius-s: 10px;
-  --radius-l: 30px;
+  --radius-sm: 10px;
+  --radius-lg: 30px;
 }
 
 @theme {

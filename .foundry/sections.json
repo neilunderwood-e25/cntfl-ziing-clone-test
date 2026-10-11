@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "page": {
+    "probeUrl": "/ctas/cta"
+  },
+  "families": [
+    {
+      "model": "ctas",
+      "typename": "Ctas",
+      "name": "Ctas",
+      "folder": "ctas",
+      "fields": [
+        { "id": "sectionId", "kind": "scalar", "type": "string" },
+        { "id": "eyebrow", "kind": "richText", "common": "richtext" },
+        { "id": "headline", "kind": "richText", "common": "richtext" },
+        { "id": "description", "kind": "richText", "common": "richtext" },
+        { "id": "buttons", "kind": "common", "commons": ["button"] },
+        { "id": "backgroundColor", "kind": "scalar", "type": "string" },
+        { "id": "backgroundMedia", "kind": "common", "commons": ["image"] },
+        { "id": "sectionAppearance", "kind": "delivery" }
+      ],
+      "variants": [
+        {
+          "key": "CTA",
+          "value": "CTA",
+          "folder": "cta",
+          "export": "Cta"
+        }
+      ]
+    }
+  ]
+}

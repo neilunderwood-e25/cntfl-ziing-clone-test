@@ -55,10 +55,10 @@ const specimenClasses: Record<string, Record<string, string>> = {
     "21xl": "w-21xl",
   },
   radii: {
-    none: "rounded-[0px]",
-    xs: "rounded-[5px]",
-    s: "rounded-[10px]",
-    l: "rounded-[30px]",
+    none: "rounded-none",
+    xs: "rounded-xs",
+    sm: "rounded-sm",
+    lg: "rounded-lg",
   },
   icons: {
     "arrow-right": "icon icon-arrow-right",

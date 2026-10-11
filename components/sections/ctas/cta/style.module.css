@@ -1,0 +1,26 @@
+@reference "../../../../styles/globals.css";
+
+/*
+ * Subtle scroll parallax on the background media (ZING-320). The layer is
+ * oversized by 8% top and bottom so the ±6% drift never exposes an edge.
+ * Scroll-driven animation is progressive enhancement: browsers without it,
+ * and visitors who prefer reduced motion, see the static image.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .parallax {
+      @apply will-change-transform;
+      animation: parallax-drift linear both;
+      animation-timeline: view();
+    }
+  }
+}
+
+@keyframes parallax-drift {
+  from {
+    transform: translate3d(0, -6%, 0);
+  }
+  to {
+    transform: translate3d(0, 6%, 0);
+  }
+}
