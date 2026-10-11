@@ -17,6 +17,10 @@
     "agent:test": "node --test tools/agentguard/tests/*.test.mjs"
   },
   "dependencies": {
+    "@contentful/rich-text-react-renderer": "^16.2.2",
+    "@contentful/rich-text-types": "^17.2.7",
+    "@eight25-factory/live-preview": "file:packages/eight25-factory-live-preview-0.5.0.tgz",
+    "@fancyapps/ui": "^6.1.15",
     "next": "16.2.12",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"

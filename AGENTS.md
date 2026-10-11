@@ -61,19 +61,49 @@ your plan — policy edits are deliberate acts, not side effects.
 
 > Maintained by agents. Update when you add/remove a CMS, CDN, or purge layer.
 
-- **CMS**: `contentful` adapter implemented (`lib/cms/contentful/`). Not yet
-  pointed at a real space — the sample content model (`flexiblePage` +
-  `heroBanner`) must exist in / be aligned to the project's space
-  (`scripts/create-content-model.mjs` seeds it on an empty space).
+- **CMS**: `contentful` adapter implemented (`lib/cms/contentful/`), pointed
+  at the `ziing-clone` space (`ya6vm6e6836y`, `master`; `.env.local` and
+  `.foundry/project.json`) — a copy of the Ziing client space's full content
+  model and content. That model has `flexiblePage` but NO `heroBanner`, so
+  the sample page query's `... on HeroBanner` spread is invalid against it
+  until Foundry wires the real section families in its place. Do not run
+  `scripts/create-content-model.mjs` here: the space is not empty.
 - **Section pattern**: `HeroBanner` → `Hero` family → exact `frontendComponent`
   dispatch to `heroWithBanner` / `heroWithCTA`. Constants live in
   `lib/content/enum.ts`, derived unions in `lib/content/types.ts`, normalized
   family data in `types/contentful.ts`. The sample seeder creates `/` and
   `/sample-cta`; older spaces require a manual discriminator migration.
 - **Common components**: developer-owned seam documented in
-  `components/common/README.md`; no project-specific common models/components
-  or foundation tokens are assumed. Foundry generates style guide/container
-  per project before common components and sections are built.
+  `components/common/README.md`. Foundry generates style guide/container per
+  project before common components and sections are built. Built so far,
+  copied verbatim from `cntfl-ziing` at the paths `.foundry/sections.json`
+  already binds: `image/` (`Image` model), `button/` (`Button` model; links
+  via `pageHref`/`externalHref`, may open a Video lightbox), `video/`
+  (default export; inline/popup, upload/YouTube/Vimeo, `@fancyapps/ui`
+  lightbox) and `richtext/` (`Richtext`; Contentful rich-text renderer,
+  embedded `Button` entries grouped as CTAs). Their fragments live in
+  `lib/content/queries/fragments/common/` (`asset`, `image`, `video`,
+  `button`, plus the `page-link` selection), with `lib/page-routes.ts`
+  (`PAGE_ROUTES`: `resourcePage` → `/resources/<slug>`) and
+  `lib/live-preview/field-tags.ts` (`fieldTag`; the vendored
+  `@eight25-factory/live-preview` supplies only its type here — no live
+  preview is wired, so tags render nothing). Rich-text `links` (embedded
+  Buttons) need a separate entries query that Foundry's section wiring
+  generates; until then embedded Buttons do not render.
+  `sections.json` also binds `sectionAppearance` and the `card`, `logoItem`,
+  `metric`, `menuItem`, `navigationLink` fragments, which are NOT here yet.
+  The GraphQL client (`lib/cms/contentful/client.ts`) throws on ANY GraphQL
+  error, including `UNRESOLVABLE_LINK`; the space has such links (e.g. a
+  Button's `popupVideoFile` → an unpublished Video), which cntfl-ziing's
+  client tolerates.
+- **Foundation (Foundry)**: Ziing's style guide and container, copied
+  verbatim from the `cntfl-ziing` repo with its tracked `.foundry` state
+  (`foundation-state.json` lists the generated files): `styles/` (imported by
+  `app/globals.css`), `/styleguide`, `/container`,
+  `components/ui/Container.tsx`, and fonts/icon sprite/logos under
+  `public/assets/`. `.foundry/sections.json` and the `wiring-*` state came
+  across too and describe cntfl-ziing's section wiring, whose files are NOT
+  in this repo.
 - **Images**: sample Hero uses Next Image with HTTPS `images.ctfassets.net`
   assets allowed in `next.config.ts`.
 - **CDN layers (outermost first)**: none. Responses already carry
