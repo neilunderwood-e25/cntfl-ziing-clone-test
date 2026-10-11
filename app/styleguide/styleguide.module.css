@@ -1,0 +1,365 @@
+/* Generated preview presentation; project styles follow the corporate util partials. */
+@reference "../../styles/globals.css";
+.guide {
+  background: #f4f4f5;
+  color: #18181b;
+  padding-block: 64px 80px;
+  font-family: var(--font-neulis-sans);
+  overflow-wrap: anywhere;
+}
+.board {
+  width: calc(100% - 80px);
+  max-width: 1120px;
+  margin-inline: auto;
+}
+.header h1,
+.guide h2,
+.guide h3 {
+  font-family: var(--font-neulis-sans);
+  line-height: 1.2;
+  letter-spacing: normal;
+  font-feature-settings: normal;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 36px;
+}
+.header h1 {
+  font-size: 52px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.header p {
+  font-size: 24px;
+  color: #545556;
+  margin-top: 8px;
+}
+.brand {
+  width: 182px;
+  max-width: 30%;
+  height: auto;
+}
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  padding-block: 18px;
+  border-block: 1px solid #83868b;
+  margin-bottom: 60px;
+  font-size: 14px;
+}
+.nav a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.guide a:focus-visible,
+.guide summary:focus-visible,
+.typeSample:focus-visible {
+  outline: 3px solid var(--color-blue);
+  outline-offset: 4px;
+}
+.guide section {
+  scroll-margin-top: 24px;
+  margin-bottom: 60px;
+}
+.guide h2 {
+  font-size: 24px;
+  font-weight: 500;
+  padding-bottom: 24px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #d4d4d8;
+}
+.guide h3 {
+  font-weight: 500;
+}
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 30px;
+}
+.swatch {
+  min-height: 200px;
+  padding: 22px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+}
+.swatch h3 {
+  font-size: 24px;
+}
+.swatch p {
+  font-size: 14px;
+  line-height: 1.4;
+}
+.swatch code {
+  font-size: 11px;
+}
+.twoColumns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 44px;
+}
+.fontCard {
+  background: #fff;
+  border: 1px solid #d4d4d8;
+  border-radius: 8px;
+  padding: 24px;
+  min-width: 0;
+}
+.fontCard h3 {
+  font-size: 20px;
+}
+.fontWeight {
+  font-size: 20px;
+  line-height: 1.5;
+  margin-top: 12px;
+}
+.count {
+  font-size: 14px;
+  font-weight: 400;
+  color: #52525b;
+  margin-left: 12px;
+}
+.description {
+  font-size: 14px;
+  line-height: 1.6;
+  font-weight: 400;
+  color: #52525b;
+  margin: -12px 0 24px;
+}
+.typeList {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+}
+.typeCard {
+  min-width: 0;
+  background: #fff;
+  border: 1px solid #d4d4d8;
+  border-radius: 8px;
+}
+.typeHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 20px;
+  padding: 18px 24px;
+}
+.typeHeader h3 {
+  font-size: 18px;
+}
+.typeHeader code {
+  font-size: 12px;
+  color: #52525b;
+}
+.typeSample {
+  min-width: 0;
+  overflow: auto;
+  max-height: 400px;
+  padding: 32px 24px;
+  border-block: 1px solid #e4e4e7;
+  outline-offset: -4px;
+}
+.typeSample > p {
+  width: max-content;
+  white-space: nowrap;
+  margin: 0;
+}
+.typeMetrics {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+  padding: 18px 24px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.typeMetrics dt {
+  color: #71717a;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+.typeMetrics dd {
+  margin: 0;
+  color: #18181b;
+}
+.buttonColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+}
+.buttonColumn h3 {
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #545556;
+}
+.caption {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #424344;
+  margin-block: 10px;
+}
+.assets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.assets figure {
+  min-width: 90px;
+}
+.assets figure > div {
+  background: #545556;
+  padding: 20px;
+  display: grid;
+  place-items: center;
+  min-height: 80px;
+}
+.assets figcaption {
+  font-size: 12px;
+  margin-top: 8px;
+}
+.spacingTable {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 20px 0 32px;
+}
+.spacingTable:focus-visible {
+  outline: 2px solid #27272a;
+  outline-offset: 4px;
+}
+.spacingTable table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.spacingTable th,
+.spacingTable td {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid #d4d4d8;
+  vertical-align: middle;
+}
+.spacingTable th {
+  font-weight: 600;
+}
+.spacingTable code,
+.spacingTable td:nth-child(2),
+.spacingTable td:nth-child(3) {
+  white-space: nowrap;
+}
+.spacingTable td:nth-child(4) {
+  min-width: 180px;
+  overflow-wrap: anywhere;
+}
+.spacingTable td:last-child {
+  min-width: 140px;
+}
+.spacingTable span {
+  display: block;
+  height: 16px;
+  max-width: 260px;
+  background: var(--color-blue);
+}
+.radiusGrid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.radiusGrid > div > div {
+  width: 80px;
+  height: 80px;
+  background: var(--color-blue);
+  margin-bottom: 10px;
+}
+.radiusGrid code {
+  font-size: 12px;
+}
+.guide ul {
+  list-style: disc;
+  padding-left: 20px;
+  line-height: 1.7;
+  font-size: 14px;
+}
+.guide details {
+  margin-top: 24px;
+}
+.guide summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.guide pre {
+  background: #f0f2f4;
+  padding: 20px;
+  font-size: 12px;
+  overflow: auto;
+  max-height: 400px;
+  margin-top: 16px;
+}
+@media (max-width: 1100px) {
+  .swatches {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 767px) {
+  .guide {
+    padding-top: 40px;
+  }
+  .board {
+    width: calc(100% - 40px);
+  }
+  .header {
+    align-items: flex-start;
+  }
+  .header h1 {
+    font-size: 32px;
+  }
+  .header p {
+    font-size: 14px;
+  }
+  .brand {
+    width: 84px;
+    padding: 10px;
+  }
+  .nav {
+    gap: 14px 20px;
+    margin-bottom: 40px;
+  }
+  .twoColumns {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+  .swatches {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .swatch {
+    padding: 16px;
+    min-height: 190px;
+  }
+  .swatch h3 {
+    font-size: 20px;
+  }
+  .typeHeader,
+  .typeMetrics {
+    padding: 16px;
+  }
+  .typeSample {
+    padding: 24px 16px;
+  }
+  .typeMetrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .guide h2 {
+    font-size: 22px;
+  }
+}

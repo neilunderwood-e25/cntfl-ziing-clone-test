@@ -1,0 +1,2587 @@
+{
+  "schemaVersion": 2,
+  "stylingPattern": "eight25-corporate-v1",
+  "name": "Ziing",
+  "reference": {
+    "fileKey": "6oY4xwLnh9C4KSZYa70BJm",
+    "nodeId": "7136:11801"
+  },
+  "generation": {
+    "spacing": {
+      "source": "default",
+      "scale": "e25-spacing-v1",
+      "reason": "variables-unavailable"
+    },
+    "requestedReference": {
+      "fileKey": "6oY4xwLnh9C4KSZYa70BJm",
+      "nodeId": "7136:11801"
+    },
+    "customFonts": [
+      {
+        "id": "34d58a2d-beb1-487e-99e8-3c436b5aa84f",
+        "name": "NeulisSans-Black.woff2",
+        "family": "NeulisSans",
+        "weight": "900",
+        "style": "normal"
+      },
+      {
+        "id": "89f89908-e9a5-458d-9bc7-24e083c63e29",
+        "name": "NeulisSans-BlackItalic.woff2",
+        "family": "NeulisSans",
+        "weight": "900",
+        "style": "italic"
+      },
+      {
+        "id": "a96ce14c-6270-47c6-80e7-ebcbac625595",
+        "name": "NeulisSans-Bold.woff2",
+        "family": "NeulisSans",
+        "weight": "700",
+        "style": "normal"
+      },
+      {
+        "id": "8bbd77bf-a46d-4ec5-b4d7-0785c5a833c7",
+        "name": "NeulisSans-BoldItalic.woff2",
+        "family": "NeulisSans",
+        "weight": "700",
+        "style": "italic"
+      },
+      {
+        "id": "abc30552-4959-4d4a-b887-737c532b01bd",
+        "name": "NeulisSans-ExtraBold.woff2",
+        "family": "NeulisSans",
+        "weight": "800",
+        "style": "normal"
+      },
+      {
+        "id": "cf57e379-634c-43bf-90bd-5b54f44cb1d7",
+        "name": "NeulisSans-ExtraBoldItalic.woff2",
+        "family": "NeulisSans",
+        "weight": "800",
+        "style": "italic"
+      },
+      {
+        "id": "9129eec8-d732-4e16-8930-65b661209a4e",
+        "name": "NeulisSans-ExtraLight.woff2",
+        "family": "NeulisSans",
+        "weight": "200",
+        "style": "normal"
+      },
+      {
+        "id": "757a7ddb-4e21-4476-a5f9-3b1a9f0377f3",
+        "name": "NeulisSans-ExtraLightItalic.woff2",
+        "family": "NeulisSans",
+        "weight": "200",
+        "style": "italic"
+      },
+      {
+        "id": "3015eccb-da88-49c1-a784-8e1cadb8f6ce",
+        "name": "NeulisSans-Hairline.woff2",
+        "family": "NeulisSans",
+        "weight": "100",
+        "style": "normal"
+      },
+      {
+        "id": "b40ee92f-e33a-459d-9262-820873a63e8c",
+        "name": "NeulisSans-HairlineItalic.woff2",
+        "family": "NeulisSans",
+        "weight": "100",
+        "style": "italic"
+      },
+      {
+        "id": "64d1a5b7-7a5d-4776-acd4-2abde48625ac",
+        "name": "NeulisSans-Light.woff2",
+        "family": "NeulisSans",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "id": "ab5a8945-bac2-4964-92f1-b7bf12320860",
+        "name": "NeulisSans-LightItalic.woff2",
+        "family": "NeulisSans",
+        "weight": "300",
+        "style": "italic"
+      },
+      {
+        "id": "f8ada2f6-3255-4b01-9266-bcbe8f7771c5",
+        "name": "NeulisSans-Medium.woff2",
+        "family": "NeulisSans",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "id": "b4d8f280-a4aa-4670-b2e6-ca658c50233e",
+        "name": "NeulisSans-MediumItalic.woff2",
+        "family": "NeulisSans",
+        "weight": "500",
+        "style": "italic"
+      },
+      {
+        "id": "a53ac7c9-2e6e-4144-90db-6b6b1fc48dbd",
+        "name": "NeulisSans-Regular.woff2",
+        "family": "NeulisSans",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "id": "ca2e57f1-315d-4e6d-a786-a4e317adb08b",
+        "name": "NeulisSans-RegularItalic.woff2",
+        "family": "NeulisSans",
+        "weight": "400",
+        "style": "italic"
+      },
+      {
+        "id": "72d5caeb-9ce8-46fb-8d03-849f55d28673",
+        "name": "NeulisSans-SemiBold.woff2",
+        "family": "NeulisSans",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "id": "2440b9f7-8bf0-40bb-b58f-f60fe3ebacbf",
+        "name": "NeulisSans-SemiBoldItalic.woff2",
+        "family": "NeulisSans",
+        "weight": "600",
+        "style": "italic"
+      },
+      {
+        "id": "179f3f93-5d77-41cd-8d04-670ae41e1096",
+        "name": "NeulisSans-Thin.woff2",
+        "family": "NeulisSans",
+        "weight": "100",
+        "style": "normal"
+      },
+      {
+        "id": "36133bd8-2fdc-40b2-83ca-bd88f18e982a",
+        "name": "NeulisSans-ThinItalic.woff2",
+        "family": "NeulisSans",
+        "weight": "100",
+        "style": "italic"
+      }
+    ]
+  },
+  "notes": [
+    "Colors: Black, Blue, White, Yellow, Orange and Light Blue use the named Figma paint styles from colorNames. Swatches #F0EEE1 (VariableID:7137:365), #FAFF5B (7137:368) and #C1BEBF (7137:369) are bound to variables whose names are not exposed and are labelled only by hex on the board, so descriptive fallback names were used: cream, bright-yellow, gray.",
+    "Typography: all 17 named text styles were captured once each from their specimen TEXT nodes. Letter spacing was converted from px to em (e.g. -2.2px/220px = -0.01em). Button Text uses Figma Auto line height (INTRINSIC_%), recorded as 'normal'; its documentation note says 21px (measured Auto = 20.88px). Resource stat header uses a fixed 66px line height. Source is underlined. No mobile sizes are documented.",
+    "Element mapping: h1-h4 map to Header 1 / Heading 2 / Header 3 / Header 4 based on their explicit header names. h5, h6 and p are null because no explicit semantic mapping is documented (Body 1 vs Body 2 is ambiguous).",
+    "Fonts: product typography uses only Neulis Sans (300, 400, 500, 600, 700), matched to the attached NeulisSans files. Inter and Lexend appear only in board labels and documentation and are excluded. The LIGA-off flag appears only on the 'Aa' font showcase specimens, so no feature flags were applied.",
+    "Button families: 'primary' is one shared structure: 50px-high pill, radius 25, padding 13/15, Button Text 16/600, label-to-icon gap 20, right-arrow glyph 20.37x17.58. Its five colorways (blue, black, yellow, orange, light-blue) are color-only variations; the black colorway uses white text and a white glyph. The hover is a split: transparent root, filled label pill (padding 14/14/15/15, radius 25), and a filled 50px icon circle in the same colour overlapping by -8px.",
+    "Button families: 'download' and 'external' reuse the primary structure and split hover but swap the glyph (download arrow 17.58x20.37; external-link arrow in a 26.83 box). 'play' (Watch video) has its own default structure: radius 28, padding 9/14/9/18 (encoded as root paddingX 14 plus label paddingLeft 4), gap 8, 24px play glyph. Its hover is the standard split with a 50px circle. 'icon' is icon-only: a 50px circle with the arrow glyph and identical default/hover frames, so no hover change is documented. 'link' is text plus arrow (600 18px/155%, blue arrow) whose only hover change is gap 10 to 15. 'inline' and 'inline-white' are Body 1 inline links with a 2px Light Blue underline 23px below the label top; on hover they add a Light Blue 30%-opacity highlight (24px high, offset 1px).",
+    "Button cap: the schema allows at most 12 buttons, so these observed permutations were not emitted separately: Download button in the blue colorway (10008:17573 / hover 10008:17584), External link button in the black colorway (10008:17596 / 10008:17608), icon-only blue circle with a black arrow (7156:13219 / 7156:13228), and the text link with a black arrow (10008:17618 / 10008:17625). Each combines a retained structure with a retained palette colour.",
+    "Icons: the Icons section's black arrow group (7169:13271) matches Arrow-Right 1 (7905:986) in size and paint and reuses the 'arrow-right' asset. Button-only glyph colourings are exported from their own nodes: arrow-right-white 7169:13274, arrow-right-blue 10008:17617, arrow-download-white 10008:17571, arrow-external-link-white 10008:17600 (exports as a 26.83px rotated box). The black download and external-link button glyphs reuse Arrow-Download 1 (7905:982) and Arrow-ExternalLink 1 (7905:984), which have matching dimensions. The '-Square' industry icons are multi-colour 44px tiles.",
+    "Brand/logo: the Ziing horizontal logo (7169:13262) is the logo and the 32px blue tile mark (7169:13256) is the favicon. The Eight25 credit group (7136:11808) is classified as brand artwork; its logo is an IMAGE fill, so the SVG export will embed raster data.",
+    "Spacing is copied from spacingEvidence (default e25-spacing-v1 scale; variables unavailable). Radii, breakpoints and container use the supplied defaults. The measured button radii (25 and 28) are carried on the button specs, and the 5px swatch radius matches the default xs.",
+    "The host exports each item in labeled icon/logo rows, including unnamed vectors. Button paints are read from the mapped Figma states; empty fills stay transparent.",
+    "Styles use the selected breakpoint system. Generate the E25 padded Container separately after applying the style guide. Google families use next/font/google; custom families use the attached files.",
+    "Figma variables could not be read. Using the default 30-token spacing scale and its spacing safelist."
+  ],
+  "colors": [
+    {
+      "id": "black",
+      "label": "Black",
+      "value": "#231F20"
+    },
+    {
+      "id": "blue",
+      "label": "Blue",
+      "value": "#5A8AFF"
+    },
+    {
+      "id": "cream",
+      "label": "Cream (#F0EEE1)",
+      "value": "#F0EEE1"
+    },
+    {
+      "id": "yellow",
+      "label": "Yellow",
+      "value": "#FDFF7F"
+    },
+    {
+      "id": "light-blue",
+      "label": "Light Blue",
+      "value": "#A1C8FF"
+    },
+    {
+      "id": "orange",
+      "label": "Orange",
+      "value": "#FFAB66"
+    },
+    {
+      "id": "bright-yellow",
+      "label": "Bright Yellow (#FAFF5B)",
+      "value": "#FAFF5B"
+    },
+    {
+      "id": "gray",
+      "label": "Gray (#C1BEBF)",
+      "value": "#C1BEBF"
+    },
+    {
+      "id": "white",
+      "label": "White",
+      "value": "#FFFFFF"
+    }
+  ],
+  "fonts": [
+    {
+      "id": "neulis-sans",
+      "family": "Neulis Sans",
+      "provider": "local",
+      "faces": [
+        {
+          "source": "assets/NeulisSans-Black.woff2",
+          "weight": "900",
+          "style": "normal"
+        },
+        {
+          "source": "assets/NeulisSans-BlackItalic.woff2",
+          "weight": "900",
+          "style": "italic"
+        },
+        {
+          "source": "assets/NeulisSans-Bold.woff2",
+          "weight": "700",
+          "style": "normal"
+        },
+        {
+          "source": "assets/NeulisSans-BoldItalic.woff2",
+          "weight": "700",
+          "style": "italic"
+        },
+        {
+          "source": "assets/NeulisSans-ExtraBold.woff2",
+          "weight": "800",
+          "style": "normal"
+        },
+        {
+          "source": "assets/NeulisSans-ExtraBoldItalic.woff2",
+          "weight": "800",
+          "style": "italic"
+        },
+        {
+          "source": "assets/NeulisSans-ExtraLight.woff2",
+          "weight": "200",
+          "style": "normal"
+        },
+        {
+          "source": "assets/NeulisSans-ExtraLightItalic.woff2",
+          "weight": "200",
+          "style": "italic"
+        },
+        {
+          "source": "assets/NeulisSans-Hairline.woff2",
+          "weight": "100",
+          "style": "normal"
+        },
+        {
+          "source": "assets/NeulisSans-HairlineItalic.woff2",
+          "weight": "100",
+          "style": "italic"
+        },
+        {
+          "source": "assets/NeulisSans-Light.woff2",
+          "weight": "300",
+          "style": "normal"
+        },
+        {
+          "source": "assets/NeulisSans-LightItalic.woff2",
+          "weight": "300",
+          "style": "italic"
+        },
+        {
+          "source": "assets/NeulisSans-Medium.woff2",
+          "weight": "500",
+          "style": "normal"
+        },
+        {
+          "source": "assets/NeulisSans-MediumItalic.woff2",
+          "weight": "500",
+          "style": "italic"
+        },
+        {
+          "source": "assets/NeulisSans-Regular.woff2",
+          "weight": "400",
+          "style": "normal"
+        },
+        {
+          "source": "assets/NeulisSans-RegularItalic.woff2",
+          "weight": "400",
+          "style": "italic"
+        },
+        {
+          "source": "assets/NeulisSans-SemiBold.woff2",
+          "weight": "600",
+          "style": "normal"
+        },
+        {
+          "source": "assets/NeulisSans-SemiBoldItalic.woff2",
+          "weight": "600",
+          "style": "italic"
+        },
+        {
+          "source": "assets/NeulisSans-Thin.woff2",
+          "weight": "100",
+          "style": "normal"
+        },
+        {
+          "source": "assets/NeulisSans-ThinItalic.woff2",
+          "weight": "100",
+          "style": "italic"
+        }
+      ]
+    }
+  ],
+  "typography": [
+    {
+      "id": "feature-header",
+      "label": "Feature Header",
+      "font": "neulis-sans",
+      "size": 220,
+      "weight": 700,
+      "sourceNodeId": "7136:11989",
+      "lineHeight": {
+        "unit": "percent",
+        "value": 80
+      },
+      "textDecoration": "none",
+      "fontStyle": "normal",
+      "textCase": "original",
+      "letterSpacing": -0.01,
+      "uppercase": false,
+      "features": []
+    },
+    {
+      "id": "header-1",
+      "label": "Header 1",
+      "font": "neulis-sans",
+      "size": 120,
+      "weight": 700,
+      "sourceNodeId": "7136:11994",
+      "lineHeight": {
+        "unit": "percent",
+        "value": 100
+      },
+      "textDecoration": "none",
+      "fontStyle": "normal",
+      "textCase": "original",
+      "letterSpacing": -0.01,
+      "uppercase": false,
+      "features": []
+    },
+    {
+      "id": "heading-2",
+      "label": "Heading 2",
+      "font": "neulis-sans",
+      "size": 60,
+      "weight": 600,
+      "sourceNodeId": "7136:11999",
+      "lineHeight": {
+        "unit": "percent",
+        "value": 108.000008
+      },
+      "textDecoration": "none",
+      "fontStyle": "normal",
+      "textCase": "original",
+      "letterSpacing": -0.01,
+      "uppercase": false,
+      "features": []
+    },
+    {
+      "id": "header-3",
+      "label": "Header 3",
+      "font": "neulis-sans",
+      "size": 42,
+      "weight": 600,
+      "sourceNodeId": "7136:12004",
+      "lineHeight": {
+        "unit": "percent",
+        "value": 104.999992
+      },
+      "textDecoration": "none",
+      "fontStyle": "normal",
+      "textCase": "original",
+      "letterSpacing": -0.01,
+      "uppercase": false,
+      "features": []
+    },
+    {
+      "id": "header-4",
+      "label": "Header 4",
+      "font": "neulis-sans",
+      "size": 26,
+      "weight": 600,
+      "sourceNodeId": "7136:12009",
+      "lineHeight": {
+        "unit": "percent",
+        "value": 120.000008
+      },
+      "textDecoration": "none",
+      "fontStyle": "normal",
+      "textCase": "original",
+      "letterSpacing": -0.01,
+      "uppercase": false,
+      "features": []
+    },
+    {
+      "id": "banner-eyebrow",
+      "label": "Banner Eyebrow",
+      "font": "neulis-sans",
+      "size": 18,
+      "weight": 700,
+      "sourceNodeId": "7136:12014",
+      "lineHeight": {
+        "unit": "percent",
+        "value": 110
+      },
+      "textDecoration": "none",
+      "fontStyle": "normal",
+      "textCase": "original",
+      "letterSpacing": -0.01,
+      "uppercase": false,
+      "features": []
+    },
+    {
+      "id": "body-eyebrow",
+      "label": "Body Eyebrow",
+      "font": "neulis-sans",
+      "size": 16,
+      "weight": 700,
+      "sourceNodeId": "7136:13127",
+      "lineHeight": {
+        "unit": "percent",
+        "value": 110
+      },
+      "textDecoration": "none",
+      "fontStyle": "normal",
+      "textCase": "original",
+      "letterSpacing": -0.01,
+      "uppercase": false,
+      "features": []
+    },
+    {
+      "id": "nav-menu",
+      "label": "Nav Menu",
+      "font": "neulis-sans",
+      "size": 16,
+      "weight": 700,
+      "sourceNodeId": "7136:12034",
+      "lineHeight": {
+        "unit": "percent",
+        "value": 110
+      },
+      "textDecoration": "none",
+      "fontStyle": "normal",
+      "textCase": "original",
+      "letterSpacing": 0,
+      "uppercase": false,
+      "features": []
+    },
+    {
+      "id": "lead",
+      "label": "Lead",
+      "font": "neulis-sans",
+      "size": 22,
+      "weight": 600,
+      "sourceNodeId": "7136:12019",
+      "lineHeight": {
+        "unit": "percent",
+        "value": 170
+      },
+      "textDecoration": "none",
+      "fontStyle": "normal",
+      "textCase": "original",
+      "letterSpacing": 0,
+      "uppercase": false,
+      "features": []
+    },
+    {
+      "id": "body-1",
+      "label": "Body 1",
+      "font": "neulis-sans",
+      "size": 18,
+      "weight": 400,
+      "sourceNodeId": "7136:12024",
+      "lineHeight": {
+        "unit": "percent",
+        "value": 155
+      },
+      "textDecoration": "none",
+      "fontStyle": "normal",
+      "textCase": "original",
+      "letterSpacing": 0,
+      "uppercase": false,
+      "features": []
+    },
+    {
+      "id": "body-2",
+      "label": "Body 2",
+      "font": "neulis-sans",
+      "size": 16,
+      "weight": 400,
+      "sourceNodeId": "7136:12029",
+      "lineHeight": {
+        "unit": "percent",
+        "value": 155
+      },
+      "textDecoration": "none",
+      "fontStyle": "normal",
+      "textCase": "original",
+      "letterSpacing": 0,
+      "uppercase": false,
+      "features": []
+    },
+    {
+      "id": "button-text",
+      "label": "Button Text",
+      "font": "neulis-sans",
+      "size": 16,
+      "weight": 600,
+      "sourceNodeId": "7156:13143",
+      "lineHeight": "normal",
+      "textDecoration": "none",
+      "fontStyle": "normal",
+      "textCase": "original",
+      "letterSpacing": -0.01,
+      "uppercase": false,
+      "features": []
+    },
+    {
+      "id": "stat-header",
+      "label": "Stat header",
+      "font": "neulis-sans",
+      "size": 95,
+      "weight": 700,
+      "sourceNodeId": "7136:12044",
+      "lineHeight": {
+        "unit": "percent",
+        "value": 80
+      },
+      "textDecoration": "none",
+      "fontStyle": "normal",
+      "textCase": "original",
+      "letterSpacing": -0.01,
+      "uppercase": false,
+      "features": []
+    },
+    {
+      "id": "stat-body",
+      "label": "Stat body",
+      "font": "neulis-sans",
+      "size": 26,
+      "weight": 400,
+      "sourceNodeId": "7136:12049",
+      "lineHeight": {
+        "unit": "percent",
+        "value": 120.000008
+      },
+      "textDecoration": "none",
+      "fontStyle": "normal",
+      "textCase": "original",
+      "letterSpacing": -0.01,
+      "uppercase": false,
+      "features": []
+    },
+    {
+      "id": "resource-stat-header",
+      "label": "Resource stat header",
+      "font": "neulis-sans",
+      "size": 56,
+      "weight": 700,
+      "sourceNodeId": "7136:12054",
+      "lineHeight": {
+        "unit": "px",
+        "value": 66
+      },
+      "textDecoration": "none",
+      "fontStyle": "normal",
+      "textCase": "original",
+      "letterSpacing": -0.01,
+      "uppercase": false,
+      "features": []
+    },
+    {
+      "id": "resource-stat-body",
+      "label": "Resource stat body",
+      "font": "neulis-sans",
+      "size": 15,
+      "weight": 500,
+      "sourceNodeId": "7136:12059",
+      "lineHeight": {
+        "unit": "percent",
+        "value": 110
+      },
+      "textDecoration": "none",
+      "fontStyle": "normal",
+      "textCase": "original",
+      "letterSpacing": 0,
+      "uppercase": false,
+      "features": []
+    },
+    {
+      "id": "source",
+      "label": "Source",
+      "font": "neulis-sans",
+      "size": 12,
+      "weight": 300,
+      "sourceNodeId": "7322:21268",
+      "lineHeight": {
+        "unit": "percent",
+        "value": 100
+      },
+      "textDecoration": "underline",
+      "fontStyle": "normal",
+      "textCase": "original",
+      "letterSpacing": -0.01,
+      "uppercase": false,
+      "features": []
+    }
+  ],
+  "fontSizes": [
+    {
+      "id": "size-12",
+      "value": 12
+    },
+    {
+      "id": "size-15",
+      "value": 15
+    },
+    {
+      "id": "size-16",
+      "value": 16
+    },
+    {
+      "id": "size-18",
+      "value": 18
+    },
+    {
+      "id": "size-22",
+      "value": 22
+    },
+    {
+      "id": "size-26",
+      "value": 26
+    },
+    {
+      "id": "size-42",
+      "value": 42
+    },
+    {
+      "id": "size-56",
+      "value": 56
+    },
+    {
+      "id": "size-60",
+      "value": 60
+    },
+    {
+      "id": "size-95",
+      "value": 95
+    },
+    {
+      "id": "size-120",
+      "value": 120
+    },
+    {
+      "id": "size-220",
+      "value": 220
+    }
+  ],
+  "elements": {
+    "h1": "header-1",
+    "h2": "heading-2",
+    "h3": "header-3",
+    "h4": "header-4"
+  },
+  "spacing": [
+    {
+      "id": "0",
+      "value": 0
+    },
+    {
+      "id": "5xs",
+      "value": 5
+    },
+    {
+      "id": "4xs",
+      "value": 10
+    },
+    {
+      "id": "3xs",
+      "value": 15
+    },
+    {
+      "id": "2xs",
+      "value": 20
+    },
+    {
+      "id": "xs",
+      "value": 25
+    },
+    {
+      "id": "s",
+      "value": 30
+    },
+    {
+      "id": "m",
+      "value": 40
+    },
+    {
+      "id": "l",
+      "value": 50
+    },
+    {
+      "id": "xl",
+      "value": 60
+    },
+    {
+      "id": "2xl",
+      "value": 70
+    },
+    {
+      "id": "3xl",
+      "value": 80
+    },
+    {
+      "id": "4xl",
+      "value": 90
+    },
+    {
+      "id": "5xl",
+      "value": 100
+    },
+    {
+      "id": "6xl",
+      "value": 110
+    },
+    {
+      "id": "7xl",
+      "value": 120
+    },
+    {
+      "id": "8xl",
+      "value": 130
+    },
+    {
+      "id": "9xl",
+      "value": 140
+    },
+    {
+      "id": "10xl",
+      "value": 150
+    },
+    {
+      "id": "11xl",
+      "value": 160
+    },
+    {
+      "id": "12xl",
+      "value": 170
+    },
+    {
+      "id": "13xl",
+      "value": 180
+    },
+    {
+      "id": "14xl",
+      "value": 190
+    },
+    {
+      "id": "15xl",
+      "value": 200
+    },
+    {
+      "id": "16xl",
+      "value": 210
+    },
+    {
+      "id": "17xl",
+      "value": 220
+    },
+    {
+      "id": "18xl",
+      "value": 230
+    },
+    {
+      "id": "19xl",
+      "value": 240
+    },
+    {
+      "id": "20xl",
+      "value": 250
+    },
+    {
+      "id": "21xl",
+      "value": 260
+    }
+  ],
+  "radii": [
+    {
+      "id": "none",
+      "value": 0
+    },
+    {
+      "id": "xs",
+      "value": 5
+    },
+    {
+      "id": "s",
+      "value": 10
+    },
+    {
+      "id": "l",
+      "value": 30
+    }
+  ],
+  "breakpoints": {
+    "sm": 576,
+    "md": 768,
+    "lg": 992,
+    "xl": 1200,
+    "xxl": 1440
+  },
+  "container": {
+    "maxWidths": {
+      "md": 720,
+      "lg": 960,
+      "xl": 1440
+    },
+    "gutters": {
+      "mobile": 20,
+      "desktop": 80
+    },
+    "types": []
+  },
+  "semantics": {
+    "bodyFont": "neulis-sans",
+    "background": "white",
+    "foreground": "black",
+    "focus": "blue"
+  },
+  "assets": [
+    {
+      "id": "ziing-logo",
+      "label": "Ziing Horizontal Logo",
+      "source": "assets/ziing-logo.svg",
+      "width": 140,
+      "height": 41,
+      "group": "logo"
+    },
+    {
+      "id": "favicon",
+      "label": "Ziing Fav Icon",
+      "source": "assets/favicon.svg",
+      "width": 32,
+      "height": 32,
+      "group": "logo"
+    },
+    {
+      "id": "eight25-credit",
+      "label": "Eight25 Credit",
+      "source": "assets/eight25-credit.svg",
+      "width": 214,
+      "height": 78.98,
+      "group": "brand"
+    },
+    {
+      "id": "arrow-right",
+      "label": "Arrow Right",
+      "source": "assets/arrow-right.svg",
+      "width": 21,
+      "height": 18,
+      "group": "icon"
+    },
+    {
+      "id": "arrow-right-white",
+      "label": "Arrow Right (White)",
+      "source": "assets/arrow-right-white.svg",
+      "width": 21,
+      "height": 18,
+      "group": "icon"
+    },
+    {
+      "id": "arrow-right-blue",
+      "label": "Arrow Right (Blue)",
+      "source": "assets/arrow-right-blue.svg",
+      "width": 21,
+      "height": 18,
+      "group": "icon"
+    },
+    {
+      "id": "arrow-download",
+      "label": "Arrow Download",
+      "source": "assets/arrow-download.svg",
+      "width": 18,
+      "height": 21,
+      "group": "icon"
+    },
+    {
+      "id": "arrow-download-white",
+      "label": "Arrow Download (White)",
+      "source": "assets/arrow-download-white.svg",
+      "width": 18,
+      "height": 21,
+      "group": "icon"
+    },
+    {
+      "id": "arrow-external-link",
+      "label": "Arrow External Link",
+      "source": "assets/arrow-external-link.svg",
+      "width": 16,
+      "height": 16,
+      "group": "icon"
+    },
+    {
+      "id": "arrow-external-link-white",
+      "label": "Arrow External Link (White)",
+      "source": "assets/arrow-external-link-white.svg",
+      "width": 16,
+      "height": 16,
+      "group": "icon"
+    },
+    {
+      "id": "play",
+      "label": "Play",
+      "source": "assets/play.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "bullet-checkmark-solid",
+      "label": "Bullet CheckMark Solid",
+      "source": "assets/bullet-checkmark-solid.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "bullet-checkmark",
+      "label": "Bullet CheckMark",
+      "source": "assets/bullet-checkmark.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "bullet-exclamation-mark-solid",
+      "label": "Bullet ExclamationMark Solid",
+      "source": "assets/bullet-exclamation-mark-solid.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "bullet-number-1",
+      "label": "Bullet Number 1",
+      "source": "assets/bullet-number-1.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "bullet-number-2",
+      "label": "Bullet Number 2",
+      "source": "assets/bullet-number-2.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "bullet-number-3",
+      "label": "Bullet Number 3",
+      "source": "assets/bullet-number-3.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "bullet-number-4",
+      "label": "Bullet Number 4",
+      "source": "assets/bullet-number-4.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "bullet-number-5",
+      "label": "Bullet Number 5",
+      "source": "assets/bullet-number-5.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "bullet-number-6",
+      "label": "Bullet Number 6",
+      "source": "assets/bullet-number-6.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "bullet-number-7",
+      "label": "Bullet Number 7",
+      "source": "assets/bullet-number-7.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "bullet-number-8",
+      "label": "Bullet Number 8",
+      "source": "assets/bullet-number-8.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "bullet-number-9",
+      "label": "Bullet Number 9",
+      "source": "assets/bullet-number-9.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "bullet-number-10",
+      "label": "Bullet Number 10",
+      "source": "assets/bullet-number-10.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "department-business-development",
+      "label": "Department Business Development",
+      "source": "assets/department-business-development.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "department-finance-admin",
+      "label": "Department Finance Admin",
+      "source": "assets/department-finance-admin.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "department-human-resources",
+      "label": "Department Human Resources",
+      "source": "assets/department-human-resources.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "department-marketing-communications",
+      "label": "Department Marketing Communications",
+      "source": "assets/department-marketing-communications.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "department-operations",
+      "label": "Department Operations",
+      "source": "assets/department-operations.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "department-product-logistic-solutions",
+      "label": "Department Product Logistic Solutions",
+      "source": "assets/department-product-logistic-solutions.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "department-technology",
+      "label": "Department Technology",
+      "source": "assets/department-technology.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "industry-agriculture-square",
+      "label": "Industry Agriculture Square",
+      "source": "assets/industry-agriculture-square.svg",
+      "width": 44,
+      "height": 44,
+      "group": "icon"
+    },
+    {
+      "id": "industry-agriculture",
+      "label": "Industry Agriculture",
+      "source": "assets/industry-agriculture.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "industry-automotive-square",
+      "label": "Industry Automotive Square",
+      "source": "assets/industry-automotive-square.svg",
+      "width": 44,
+      "height": 44,
+      "group": "icon"
+    },
+    {
+      "id": "industry-automotive",
+      "label": "Industry Automotive",
+      "source": "assets/industry-automotive.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "industry-commercial-supply-square",
+      "label": "Industry Commercial Supply Square",
+      "source": "assets/industry-commercial-supply-square.svg",
+      "width": 44,
+      "height": 44,
+      "group": "icon"
+    },
+    {
+      "id": "industry-commercial-supply",
+      "label": "Industry Commercial Supply",
+      "source": "assets/industry-commercial-supply.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "industry-construction-building-supply-square",
+      "label": "Industry Construction Building Supply Square",
+      "source": "assets/industry-construction-building-supply-square.svg",
+      "width": 44,
+      "height": 44,
+      "group": "icon"
+    },
+    {
+      "id": "industry-construction-building-supply",
+      "label": "Industry Construction Building Supply",
+      "source": "assets/industry-construction-building-supply.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "industry-food-beverage-supplements-square",
+      "label": "Industry Food Beverage Supplements Square",
+      "source": "assets/industry-food-beverage-supplements-square.svg",
+      "width": 44,
+      "height": 44,
+      "group": "icon"
+    },
+    {
+      "id": "industry-food-beverage-supplements",
+      "label": "Industry Food Beverage Supplements",
+      "source": "assets/industry-food-beverage-supplements.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "industry-healthcare-pharma-square",
+      "label": "Industry Healthcare Pharma Square",
+      "source": "assets/industry-healthcare-pharma-square.svg",
+      "width": 44,
+      "height": 44,
+      "group": "icon"
+    },
+    {
+      "id": "industry-healthcare-pharma",
+      "label": "Industry Healthcare Pharma",
+      "source": "assets/industry-healthcare-pharma.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "industry-retail-ecommerce-square",
+      "label": "Industry Retail Ecommerce Square",
+      "source": "assets/industry-retail-ecommerce-square.svg",
+      "width": 44,
+      "height": 44,
+      "group": "icon"
+    },
+    {
+      "id": "industry-retail-ecommerce",
+      "label": "Industry Retail Ecommerce",
+      "source": "assets/industry-retail-ecommerce.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "general-box-b",
+      "label": "General Box B",
+      "source": "assets/general-box-b.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "general-box-arrow-circle-a",
+      "label": "General Box Arrow Circle A",
+      "source": "assets/general-box-arrow-circle-a.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "general-box-arrow-circle-b",
+      "label": "General Box Arrow Circle B",
+      "source": "assets/general-box-arrow-circle-b.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "general-box-location",
+      "label": "General Box Location",
+      "source": "assets/general-box-location.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "general-box-scale",
+      "label": "General Box Scale",
+      "source": "assets/general-box-scale.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "general-checklist",
+      "label": "General Checklist",
+      "source": "assets/general-checklist.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "general-exclamation-symbol",
+      "label": "General Exclamation Symbol",
+      "source": "assets/general-exclamation-symbol.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "general-filter",
+      "label": "General Filter",
+      "source": "assets/general-filter.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "general-growth-arrow",
+      "label": "General Growth Arrow",
+      "source": "assets/general-growth-arrow.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "general-growth-chart",
+      "label": "General Growth Chart",
+      "source": "assets/general-growth-chart.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "general-hand-holding-box",
+      "label": "General Hand Holding Box",
+      "source": "assets/general-hand-holding-box.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "general-increase",
+      "label": "General Increase",
+      "source": "assets/general-increase.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "general-location",
+      "label": "General Location",
+      "source": "assets/general-location.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "general-minus-symbol",
+      "label": "General Minus Symbol",
+      "source": "assets/general-minus-symbol.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "general-open-box-a",
+      "label": "General Open Box A",
+      "source": "assets/general-open-box-a.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "general-open-box-b",
+      "label": "General Open Box B",
+      "source": "assets/general-open-box-b.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "general-order",
+      "label": "General Order",
+      "source": "assets/general-order.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "general-plus-symbol",
+      "label": "General Plus Symbol",
+      "source": "assets/general-plus-symbol.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "general-search-a",
+      "label": "General Search A",
+      "source": "assets/general-search-a.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "general-shield-box",
+      "label": "General Shield Box",
+      "source": "assets/general-shield-box.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "general-stat-highlight",
+      "label": "General Stat Highlight",
+      "source": "assets/general-stat-highlight.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "general-support-contact",
+      "label": "General Support Contact",
+      "source": "assets/general-support-contact.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "general-temp-controlled-delivery-a",
+      "label": "General Temp Controlled Delivery A",
+      "source": "assets/general-temp-controlled-delivery-a.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "general-temp-controlled-delivery-b",
+      "label": "General Temp Controlled Delivery B",
+      "source": "assets/general-temp-controlled-delivery-b.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "general-truck",
+      "label": "General Truck",
+      "source": "assets/general-truck.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "general-truck-leaving-warehouse",
+      "label": "General Truck Leaving Warehouse",
+      "source": "assets/general-truck-leaving-warehouse.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "process-execute",
+      "label": "Process Execute",
+      "source": "assets/process-execute.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "process-order",
+      "label": "Process Order",
+      "source": "assets/process-order.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "process-repeat",
+      "label": "Process Repeat",
+      "source": "assets/process-repeat.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "process-report",
+      "label": "Process Report",
+      "source": "assets/process-report.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "process-route",
+      "label": "Process Route",
+      "source": "assets/process-route.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "model-exclusive-delivery-model",
+      "label": "Model Exclusive Delivery Model",
+      "source": "assets/model-exclusive-delivery-model.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "model-fractional-delivery-model",
+      "label": "Model Fractional Delivery Model",
+      "source": "assets/model-fractional-delivery-model.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "model-hybrid-delivery-model",
+      "label": "Model Hybrid Delivery Model",
+      "source": "assets/model-hybrid-delivery-model.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "model-on-demand-delivery-model",
+      "label": "Model On Demand Delivery Model",
+      "source": "assets/model-on-demand-delivery-model.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "accordion-close",
+      "label": "Accordion Close",
+      "source": "assets/accordion-close.svg",
+      "width": 50,
+      "height": 50,
+      "group": "icon"
+    },
+    {
+      "id": "accordion-open",
+      "label": "Accordion Open",
+      "source": "assets/accordion-open.svg",
+      "width": 50,
+      "height": 50,
+      "group": "icon"
+    },
+    {
+      "id": "chevron-down",
+      "label": "Chevron Down",
+      "source": "assets/chevron-down.svg",
+      "width": 15,
+      "height": 9,
+      "group": "icon"
+    },
+    {
+      "id": "close-search",
+      "label": "Close Search",
+      "source": "assets/close-search.svg",
+      "width": 11,
+      "height": 11,
+      "group": "icon"
+    },
+    {
+      "id": "close",
+      "label": "Close",
+      "source": "assets/close.svg",
+      "width": 19,
+      "height": 19,
+      "group": "icon"
+    },
+    {
+      "id": "hamburger-menu",
+      "label": "Hamburger Menu",
+      "source": "assets/hamburger-menu.svg",
+      "width": 14,
+      "height": 12,
+      "group": "icon"
+    },
+    {
+      "id": "play-button",
+      "label": "Play Button",
+      "source": "assets/play-button.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "read-time",
+      "label": "Read Time",
+      "source": "assets/read-time.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "search",
+      "label": "Search",
+      "source": "assets/search.svg",
+      "width": 16,
+      "height": 16,
+      "group": "icon"
+    },
+    {
+      "id": "solutions-final-mile-delivery",
+      "label": "Solutions Final Mile Delivery",
+      "source": "assets/solutions-final-mile-delivery.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "solutions-fleet-logistics",
+      "label": "Solutions Fleet Logistics",
+      "source": "assets/solutions-fleet-logistics.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "solutions-future-ready-delivery-a",
+      "label": "Solutions Future Ready Delivery A",
+      "source": "assets/solutions-future-ready-delivery-a.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "solutions-future-ready-delivery-b",
+      "label": "Solutions Future Ready Delivery B",
+      "source": "assets/solutions-future-ready-delivery-b.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "solutions-managed-logistics-programs-a",
+      "label": "Solutions Managed Logistics Programs A",
+      "source": "assets/solutions-managed-logistics-programs-a.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "solutions-managed-logistics-programs-b",
+      "label": "Solutions Managed Logistics Programs B",
+      "source": "assets/solutions-managed-logistics-programs-b.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "solutions-warehousing-fulfillment-a",
+      "label": "Solutions Warehousing Fulfillment A",
+      "source": "assets/solutions-warehousing-fulfillment-a.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "solutions-warehousing-fulfillment-b",
+      "label": "Solutions Warehousing Fulfillment B",
+      "source": "assets/solutions-warehousing-fulfillment-b.svg",
+      "width": 24,
+      "height": 24,
+      "group": "icon"
+    },
+    {
+      "id": "figma-7169-13271",
+      "label": "Group 578",
+      "source": "assets/figma-7169-13271.svg",
+      "width": 21,
+      "height": 18,
+      "group": "icon"
+    }
+  ],
+  "buttons": [
+    {
+      "id": "primary",
+      "family": "primary",
+      "colorway": "blue",
+      "label": "Primary CTA (Blue)",
+      "text": "Call to action button",
+      "background": "#5A8AFF",
+      "foreground": "#231F20",
+      "hoverBackground": "#5A8AFF",
+      "hoverForeground": "#231F20",
+      "border": "transparent",
+      "size": 16,
+      "paddingX": 15,
+      "paddingY": 13,
+      "radius": 25,
+      "presentation": {
+        "kind": "label-icon",
+        "font": "neulis-sans",
+        "weight": 600,
+        "lineHeight": 1.3049999475479126,
+        "letterSpacing": -0.01,
+        "default": {
+          "height": 50,
+          "gap": 20,
+          "background": "#5A8AFF",
+          "foreground": "#231F20",
+          "paddingX": 15,
+          "paddingY": 13,
+          "radius": 25,
+          "label": {
+            "background": "transparent",
+            "paddingTop": 0,
+            "paddingRight": 0,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "radius": 0
+          },
+          "icon": {
+            "asset": "arrow-right",
+            "width": 20.37,
+            "height": 17.58,
+            "boxWidth": 20.37,
+            "boxHeight": 17.58,
+            "background": "transparent",
+            "radius": 0
+          },
+          "highlight": null,
+          "underline": null
+        },
+        "hover": {
+          "height": 50,
+          "gap": -8,
+          "background": "transparent",
+          "foreground": "#231F20",
+          "paddingX": 0,
+          "paddingY": 0,
+          "radius": 0,
+          "label": {
+            "background": "#5A8AFF",
+            "paddingTop": 14,
+            "paddingRight": 14,
+            "paddingBottom": 15,
+            "paddingLeft": 15,
+            "radius": 25
+          },
+          "icon": {
+            "asset": "arrow-right",
+            "width": 20.37,
+            "height": 17.58,
+            "boxWidth": 50,
+            "boxHeight": 50,
+            "background": "#5A8AFF",
+            "radius": 25
+          },
+          "highlight": null,
+          "underline": null
+        }
+      }
+    },
+    {
+      "id": "primary-black",
+      "family": "primary",
+      "colorway": "black",
+      "label": "Primary CTA (Black)",
+      "text": "Call to action button",
+      "background": "#231F20",
+      "foreground": "#FFFFFF",
+      "hoverBackground": "#231F20",
+      "hoverForeground": "#FFFFFF",
+      "border": "transparent",
+      "size": 16,
+      "paddingX": 15,
+      "paddingY": 13,
+      "radius": 25,
+      "presentation": {
+        "kind": "label-icon",
+        "font": "neulis-sans",
+        "weight": 600,
+        "lineHeight": 1.3049999475479126,
+        "letterSpacing": -0.01,
+        "default": {
+          "height": 50,
+          "gap": 20,
+          "background": "#231F20",
+          "foreground": "#FFFFFF",
+          "paddingX": 15,
+          "paddingY": 13,
+          "radius": 25,
+          "label": {
+            "background": "transparent",
+            "paddingTop": 0,
+            "paddingRight": 0,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "radius": 0
+          },
+          "icon": {
+            "asset": "arrow-right-white",
+            "width": 20.37,
+            "height": 17.58,
+            "boxWidth": 20.37,
+            "boxHeight": 17.58,
+            "background": "transparent",
+            "radius": 0
+          },
+          "highlight": null,
+          "underline": null
+        },
+        "hover": {
+          "height": 50,
+          "gap": -8,
+          "background": "transparent",
+          "foreground": "#FFFFFF",
+          "paddingX": 0,
+          "paddingY": 0,
+          "radius": 0,
+          "label": {
+            "background": "#231F20",
+            "paddingTop": 14,
+            "paddingRight": 14,
+            "paddingBottom": 15,
+            "paddingLeft": 15,
+            "radius": 25
+          },
+          "icon": {
+            "asset": "arrow-right-white",
+            "width": 20.37,
+            "height": 17.58,
+            "boxWidth": 50,
+            "boxHeight": 50,
+            "background": "#231F20",
+            "radius": 25
+          },
+          "highlight": null,
+          "underline": null
+        }
+      }
+    },
+    {
+      "id": "primary-yellow",
+      "family": "primary",
+      "colorway": "yellow",
+      "label": "Primary CTA (Yellow)",
+      "text": "Call to action button",
+      "background": "#FDFF7F",
+      "foreground": "#231F20",
+      "hoverBackground": "#FDFF7F",
+      "hoverForeground": "#231F20",
+      "border": "transparent",
+      "size": 16,
+      "paddingX": 15,
+      "paddingY": 13,
+      "radius": 25,
+      "presentation": {
+        "kind": "label-icon",
+        "font": "neulis-sans",
+        "weight": 600,
+        "lineHeight": 1.3049999475479126,
+        "letterSpacing": -0.01,
+        "default": {
+          "height": 50,
+          "gap": 20,
+          "background": "#FDFF7F",
+          "foreground": "#231F20",
+          "paddingX": 15,
+          "paddingY": 13,
+          "radius": 25,
+          "label": {
+            "background": "transparent",
+            "paddingTop": 0,
+            "paddingRight": 0,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "radius": 0
+          },
+          "icon": {
+            "asset": "arrow-right",
+            "width": 20.37,
+            "height": 17.58,
+            "boxWidth": 20.37,
+            "boxHeight": 17.58,
+            "background": "transparent",
+            "radius": 0
+          },
+          "highlight": null,
+          "underline": null
+        },
+        "hover": {
+          "height": 50,
+          "gap": -8,
+          "background": "transparent",
+          "foreground": "#231F20",
+          "paddingX": 0,
+          "paddingY": 0,
+          "radius": 0,
+          "label": {
+            "background": "#FDFF7F",
+            "paddingTop": 14,
+            "paddingRight": 14,
+            "paddingBottom": 15,
+            "paddingLeft": 15,
+            "radius": 25
+          },
+          "icon": {
+            "asset": "arrow-right",
+            "width": 20.37,
+            "height": 17.58,
+            "boxWidth": 50,
+            "boxHeight": 50,
+            "background": "#FDFF7F",
+            "radius": 25
+          },
+          "highlight": null,
+          "underline": null
+        }
+      }
+    },
+    {
+      "id": "primary-orange",
+      "family": "primary",
+      "colorway": "orange",
+      "label": "Primary CTA (Orange)",
+      "text": "Call to action button",
+      "background": "#FFAB66",
+      "foreground": "#231F20",
+      "hoverBackground": "#FFAB66",
+      "hoverForeground": "#231F20",
+      "border": "transparent",
+      "size": 16,
+      "paddingX": 15,
+      "paddingY": 13,
+      "radius": 25,
+      "presentation": {
+        "kind": "label-icon",
+        "font": "neulis-sans",
+        "weight": 600,
+        "lineHeight": 1.3049999475479126,
+        "letterSpacing": -0.01,
+        "default": {
+          "height": 50,
+          "gap": 20,
+          "background": "#FFAB66",
+          "foreground": "#231F20",
+          "paddingX": 15,
+          "paddingY": 13,
+          "radius": 25,
+          "label": {
+            "background": "transparent",
+            "paddingTop": 0,
+            "paddingRight": 0,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "radius": 0
+          },
+          "icon": {
+            "asset": "arrow-right",
+            "width": 20.37,
+            "height": 17.58,
+            "boxWidth": 20.37,
+            "boxHeight": 17.58,
+            "background": "transparent",
+            "radius": 0
+          },
+          "highlight": null,
+          "underline": null
+        },
+        "hover": {
+          "height": 50,
+          "gap": -8,
+          "background": "transparent",
+          "foreground": "#231F20",
+          "paddingX": 0,
+          "paddingY": 0,
+          "radius": 0,
+          "label": {
+            "background": "#FFAB66",
+            "paddingTop": 14,
+            "paddingRight": 14,
+            "paddingBottom": 15,
+            "paddingLeft": 15,
+            "radius": 25
+          },
+          "icon": {
+            "asset": "arrow-right",
+            "width": 20.37,
+            "height": 17.58,
+            "boxWidth": 50,
+            "boxHeight": 50,
+            "background": "#FFAB66",
+            "radius": 25
+          },
+          "highlight": null,
+          "underline": null
+        }
+      }
+    },
+    {
+      "id": "primary-light-blue",
+      "family": "primary",
+      "colorway": "light-blue",
+      "label": "Primary CTA (Light Blue)",
+      "text": "Call to action button",
+      "background": "#A1C8FF",
+      "foreground": "#231F20",
+      "hoverBackground": "#A1C8FF",
+      "hoverForeground": "#231F20",
+      "border": "transparent",
+      "size": 16,
+      "paddingX": 15,
+      "paddingY": 13,
+      "radius": 25,
+      "presentation": {
+        "kind": "label-icon",
+        "font": "neulis-sans",
+        "weight": 600,
+        "lineHeight": 1.3049999475479126,
+        "letterSpacing": -0.01,
+        "default": {
+          "height": 50,
+          "gap": 20,
+          "background": "#A1C8FF",
+          "foreground": "#231F20",
+          "paddingX": 15,
+          "paddingY": 13,
+          "radius": 25,
+          "label": {
+            "background": "transparent",
+            "paddingTop": 0,
+            "paddingRight": 0,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "radius": 0
+          },
+          "icon": {
+            "asset": "arrow-right",
+            "width": 20.37,
+            "height": 17.58,
+            "boxWidth": 20.37,
+            "boxHeight": 17.58,
+            "background": "transparent",
+            "radius": 0
+          },
+          "highlight": null,
+          "underline": null
+        },
+        "hover": {
+          "height": 50,
+          "gap": -8,
+          "background": "transparent",
+          "foreground": "#231F20",
+          "paddingX": 0,
+          "paddingY": 0,
+          "radius": 0,
+          "label": {
+            "background": "#A1C8FF",
+            "paddingTop": 14,
+            "paddingRight": 14,
+            "paddingBottom": 15,
+            "paddingLeft": 15,
+            "radius": 25
+          },
+          "icon": {
+            "asset": "arrow-right",
+            "width": 20.37,
+            "height": 17.58,
+            "boxWidth": 50,
+            "boxHeight": 50,
+            "background": "#A1C8FF",
+            "radius": 25
+          },
+          "highlight": null,
+          "underline": null
+        }
+      }
+    },
+    {
+      "id": "download",
+      "family": "download",
+      "colorway": "black",
+      "label": "Download Button (Black)",
+      "text": "Download button",
+      "background": "#231F20",
+      "foreground": "#FFFFFF",
+      "hoverBackground": "#231F20",
+      "hoverForeground": "#FFFFFF",
+      "border": "transparent",
+      "size": 16,
+      "paddingX": 15,
+      "paddingY": 13,
+      "radius": 25,
+      "presentation": {
+        "kind": "label-icon",
+        "font": "neulis-sans",
+        "weight": 600,
+        "lineHeight": 1.3049999475479126,
+        "letterSpacing": -0.01,
+        "default": {
+          "height": 50,
+          "gap": 20,
+          "background": "#231F20",
+          "foreground": "#FFFFFF",
+          "paddingX": 15,
+          "paddingY": 13,
+          "radius": 25,
+          "label": {
+            "background": "transparent",
+            "paddingTop": 0,
+            "paddingRight": 0,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "radius": 0
+          },
+          "icon": {
+            "asset": "arrow-download-white",
+            "width": 17.58,
+            "height": 20.37,
+            "boxWidth": 17.58,
+            "boxHeight": 20.37,
+            "background": "transparent",
+            "radius": 0
+          },
+          "highlight": null,
+          "underline": null
+        },
+        "hover": {
+          "height": 50,
+          "gap": -8,
+          "background": "transparent",
+          "foreground": "#FFFFFF",
+          "paddingX": 0,
+          "paddingY": 0,
+          "radius": 0,
+          "label": {
+            "background": "#231F20",
+            "paddingTop": 14,
+            "paddingRight": 14,
+            "paddingBottom": 15,
+            "paddingLeft": 15,
+            "radius": 25
+          },
+          "icon": {
+            "asset": "arrow-download-white",
+            "width": 17.58,
+            "height": 20.37,
+            "boxWidth": 50,
+            "boxHeight": 50,
+            "background": "#231F20",
+            "radius": 25
+          },
+          "highlight": null,
+          "underline": null
+        }
+      }
+    },
+    {
+      "id": "external",
+      "family": "external",
+      "colorway": "blue",
+      "label": "External Link Button (Blue)",
+      "text": "External link button",
+      "background": "#5A8AFF",
+      "foreground": "#231F20",
+      "hoverBackground": "#5A8AFF",
+      "hoverForeground": "#231F20",
+      "border": "transparent",
+      "size": 16,
+      "paddingX": 15,
+      "paddingY": 13,
+      "radius": 25,
+      "presentation": {
+        "kind": "label-icon",
+        "font": "neulis-sans",
+        "weight": 600,
+        "lineHeight": 1.3049999475479126,
+        "letterSpacing": -0.01,
+        "default": {
+          "height": 50,
+          "gap": 20,
+          "background": "#5A8AFF",
+          "foreground": "#231F20",
+          "paddingX": 15,
+          "paddingY": 13,
+          "radius": 25,
+          "label": {
+            "background": "transparent",
+            "paddingTop": 0,
+            "paddingRight": 0,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "radius": 0
+          },
+          "icon": {
+            "asset": "arrow-external-link",
+            "width": 15.61,
+            "height": 15.58,
+            "boxWidth": 26.83,
+            "boxHeight": 26.83,
+            "background": "transparent",
+            "radius": 0
+          },
+          "highlight": null,
+          "underline": null
+        },
+        "hover": {
+          "height": 50,
+          "gap": -8,
+          "background": "transparent",
+          "foreground": "#231F20",
+          "paddingX": 0,
+          "paddingY": 0,
+          "radius": 0,
+          "label": {
+            "background": "#5A8AFF",
+            "paddingTop": 14,
+            "paddingRight": 14,
+            "paddingBottom": 15,
+            "paddingLeft": 15,
+            "radius": 25
+          },
+          "icon": {
+            "asset": "arrow-external-link",
+            "width": 15.61,
+            "height": 15.58,
+            "boxWidth": 50,
+            "boxHeight": 50,
+            "background": "#5A8AFF",
+            "radius": 25
+          },
+          "highlight": null,
+          "underline": null
+        }
+      }
+    },
+    {
+      "id": "play",
+      "family": "play",
+      "colorway": "blue",
+      "label": "Watch Video Button (Blue)",
+      "text": "Watch video",
+      "background": "#5A8AFF",
+      "foreground": "#231F20",
+      "hoverBackground": "#5A8AFF",
+      "hoverForeground": "#231F20",
+      "border": "transparent",
+      "size": 16,
+      "paddingX": 14,
+      "paddingY": 9,
+      "radius": 28,
+      "presentation": {
+        "kind": "label-icon",
+        "font": "neulis-sans",
+        "weight": 600,
+        "lineHeight": 1.3049999475479126,
+        "letterSpacing": -0.01,
+        "default": {
+          "height": 50,
+          "gap": 8,
+          "background": "#5A8AFF",
+          "foreground": "#231F20",
+          "paddingX": 14,
+          "paddingY": 9,
+          "radius": 28,
+          "label": {
+            "background": "transparent",
+            "paddingTop": 0,
+            "paddingRight": 0,
+            "paddingBottom": 0,
+            "paddingLeft": 4,
+            "radius": 0
+          },
+          "icon": {
+            "asset": "play",
+            "width": 24,
+            "height": 24,
+            "boxWidth": 24,
+            "boxHeight": 24,
+            "background": "transparent",
+            "radius": 0
+          },
+          "highlight": null,
+          "underline": null
+        },
+        "hover": {
+          "height": 50,
+          "gap": -8,
+          "background": "transparent",
+          "foreground": "#231F20",
+          "paddingX": 0,
+          "paddingY": 0,
+          "radius": 0,
+          "label": {
+            "background": "#5A8AFF",
+            "paddingTop": 14,
+            "paddingRight": 14,
+            "paddingBottom": 15,
+            "paddingLeft": 15,
+            "radius": 25
+          },
+          "icon": {
+            "asset": "play",
+            "width": 24,
+            "height": 24,
+            "boxWidth": 50,
+            "boxHeight": 50,
+            "background": "#5A8AFF",
+            "radius": 25
+          },
+          "highlight": null,
+          "underline": null
+        }
+      }
+    },
+    {
+      "id": "icon",
+      "family": "icon",
+      "colorway": "black",
+      "label": "Icon-only Arrow (Black)",
+      "text": "Go to next",
+      "background": "#231F20",
+      "foreground": "#FFFFFF",
+      "hoverBackground": "#231F20",
+      "hoverForeground": "#FFFFFF",
+      "border": "transparent",
+      "size": 16,
+      "paddingX": 0,
+      "paddingY": 0,
+      "radius": 25,
+      "presentation": {
+        "kind": "icon-only",
+        "font": "neulis-sans",
+        "weight": 600,
+        "lineHeight": 1.305,
+        "letterSpacing": -0.01,
+        "default": {
+          "height": 50,
+          "gap": 0,
+          "background": "transparent",
+          "foreground": "#FFFFFF",
+          "paddingX": 0,
+          "paddingY": 0,
+          "radius": 25,
+          "label": {
+            "background": "transparent",
+            "paddingTop": 0,
+            "paddingRight": 0,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "radius": 0
+          },
+          "icon": {
+            "asset": "arrow-right-white",
+            "width": 20.37,
+            "height": 17.58,
+            "boxWidth": 50,
+            "boxHeight": 50,
+            "background": "#231F20",
+            "radius": 25
+          },
+          "highlight": null,
+          "underline": null
+        },
+        "hover": {
+          "height": 50,
+          "gap": 0,
+          "background": "transparent",
+          "foreground": "#FFFFFF",
+          "paddingX": 0,
+          "paddingY": 0,
+          "radius": 25,
+          "label": {
+            "background": "transparent",
+            "paddingTop": 0,
+            "paddingRight": 0,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "radius": 0
+          },
+          "icon": {
+            "asset": "arrow-right-white",
+            "width": 20.37,
+            "height": 17.58,
+            "boxWidth": 50,
+            "boxHeight": 50,
+            "background": "#231F20",
+            "radius": 25
+          },
+          "highlight": null,
+          "underline": null
+        }
+      }
+    },
+    {
+      "id": "link",
+      "family": "link",
+      "colorway": "blue",
+      "label": "Text Link with Arrow (Blue Arrow)",
+      "text": "Learn about Hybrid",
+      "background": "transparent",
+      "foreground": "#231F20",
+      "hoverBackground": "transparent",
+      "hoverForeground": "#231F20",
+      "border": "transparent",
+      "size": 18,
+      "paddingX": 0,
+      "paddingY": 0,
+      "radius": 0,
+      "presentation": {
+        "kind": "label-icon",
+        "font": "neulis-sans",
+        "weight": 600,
+        "lineHeight": 1.5499999788072374,
+        "letterSpacing": 0,
+        "default": {
+          "height": 28,
+          "gap": 10,
+          "background": "transparent",
+          "foreground": "#231F20",
+          "paddingX": 0,
+          "paddingY": 0,
+          "radius": 0,
+          "label": {
+            "background": "transparent",
+            "paddingTop": 0,
+            "paddingRight": 0,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "radius": 0
+          },
+          "icon": {
+            "asset": "arrow-right-blue",
+            "width": 20.37,
+            "height": 17.58,
+            "boxWidth": 20.37,
+            "boxHeight": 17.58,
+            "background": "transparent",
+            "radius": 0
+          },
+          "highlight": null,
+          "underline": null
+        },
+        "hover": {
+          "height": 28,
+          "gap": 15,
+          "background": "transparent",
+          "foreground": "#231F20",
+          "paddingX": 0,
+          "paddingY": 0,
+          "radius": 0,
+          "label": {
+            "background": "transparent",
+            "paddingTop": 0,
+            "paddingRight": 0,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "radius": 0
+          },
+          "icon": {
+            "asset": "arrow-right-blue",
+            "width": 20.37,
+            "height": 17.58,
+            "boxWidth": 20.37,
+            "boxHeight": 17.58,
+            "background": "transparent",
+            "radius": 0
+          },
+          "highlight": null,
+          "underline": null
+        }
+      }
+    },
+    {
+      "id": "inline",
+      "family": "inline-link",
+      "colorway": "black",
+      "label": "Inline Text Link",
+      "text": "in line text link",
+      "background": "transparent",
+      "foreground": "#231F20",
+      "hoverBackground": "#A1C8FF4D",
+      "hoverForeground": "#231F20",
+      "border": "transparent",
+      "size": 18,
+      "paddingX": 0,
+      "paddingY": 0,
+      "radius": 0,
+      "presentation": {
+        "kind": "inline-link",
+        "font": "neulis-sans",
+        "weight": 400,
+        "lineHeight": 1.5499999788072374,
+        "letterSpacing": 0,
+        "default": {
+          "height": null,
+          "gap": 0,
+          "background": "transparent",
+          "foreground": "#231F20",
+          "paddingX": 0,
+          "paddingY": 0,
+          "radius": 0,
+          "label": {
+            "background": "transparent",
+            "paddingTop": 0,
+            "paddingRight": 0,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "radius": 0
+          },
+          "icon": null,
+          "highlight": null,
+          "underline": {
+            "color": "#A1C8FF",
+            "thickness": 2,
+            "offset": 23
+          }
+        },
+        "hover": {
+          "height": null,
+          "gap": 0,
+          "background": "transparent",
+          "foreground": "#231F20",
+          "paddingX": 0,
+          "paddingY": 0,
+          "radius": 0,
+          "label": {
+            "background": "transparent",
+            "paddingTop": 0,
+            "paddingRight": 0,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "radius": 0
+          },
+          "icon": null,
+          "highlight": {
+            "color": "#A1C8FF4D",
+            "height": 24,
+            "offset": 1
+          },
+          "underline": {
+            "color": "#A1C8FF",
+            "thickness": 2,
+            "offset": 23
+          }
+        }
+      }
+    },
+    {
+      "id": "inline-white",
+      "family": "inline-link",
+      "colorway": "white",
+      "label": "Inline Text Link (On Dark)",
+      "text": "in line text link",
+      "background": "transparent",
+      "foreground": "#FFFFFF",
+      "hoverBackground": "#A1C8FF4D",
+      "hoverForeground": "#FFFFFF",
+      "border": "transparent",
+      "size": 18,
+      "paddingX": 0,
+      "paddingY": 0,
+      "radius": 0,
+      "presentation": {
+        "kind": "inline-link",
+        "font": "neulis-sans",
+        "weight": 400,
+        "lineHeight": 1.5499999788072374,
+        "letterSpacing": 0,
+        "default": {
+          "height": null,
+          "gap": 0,
+          "background": "transparent",
+          "foreground": "#FFFFFF",
+          "paddingX": 0,
+          "paddingY": 0,
+          "radius": 0,
+          "label": {
+            "background": "transparent",
+            "paddingTop": 0,
+            "paddingRight": 0,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "radius": 0
+          },
+          "icon": null,
+          "highlight": null,
+          "underline": {
+            "color": "#A1C8FF",
+            "thickness": 2,
+            "offset": 23
+          }
+        },
+        "hover": {
+          "height": null,
+          "gap": 0,
+          "background": "transparent",
+          "foreground": "#FFFFFF",
+          "paddingX": 0,
+          "paddingY": 0,
+          "radius": 0,
+          "label": {
+            "background": "transparent",
+            "paddingTop": 0,
+            "paddingRight": 0,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "radius": 0
+          },
+          "icon": null,
+          "highlight": {
+            "color": "#A1C8FF4D",
+            "height": 24,
+            "offset": 1
+          },
+          "underline": {
+            "color": "#A1C8FF",
+            "thickness": 2,
+            "offset": 23
+          }
+        }
+      }
+    }
+  ]
+}

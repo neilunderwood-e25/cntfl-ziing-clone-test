@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "provider": "contentful",
+  "profile": "e25-contentful-family-v1",
+  "mode": "development",
+  "target": {
+    "spaceId": "ya6vm6e6836y",
+    "environment": "master",
+    "graphqlHost": "graphql.contentful.com"
+  },
+  "createdAt": "2026-10-11T18:13:04.471Z"
+}
