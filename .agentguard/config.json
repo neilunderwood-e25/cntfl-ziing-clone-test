@@ -84,7 +84,7 @@
         "integration": "contentful",
         "description": "No heavy CMS SDKs — the GraphQL client is a native-fetch POST with retry/backoff",
         "paths": ["app/**", "components/**", "lib/**", "proxy.ts"],
-        "pattern": "from\\s+[\"'](contentful|contentful-management|@contentful/(?!rich-text-))",
+        "pattern": "from\\s+[\"'](contentful|contentful-management|@contentful/)",
         "message": "Importing a Contentful SDK is forbidden — use the native-fetch client in lib/cms. See AGENTS.md core invariants.",
         "severity": "error"
       }

@@ -13,9 +13,6 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
   ]),
-
-  // Private Foundry CLI inputs and run history are not application source.
-  { ignores: [".foundry/runs/**",".foundry/foundation-inputs/**",".foundry/locks/**",".foundry/migrations/**"] },
 ]);
 
 export default eslintConfig;
